@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:textAllCaps="true"
+        android:text="blue"
+        android:textSize="80sp"
+        android:textColor="@color/black"
+        android:id="@+id/text"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <!--option part-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Blue"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:background="@drawable/stroop_button"
+                android:id="@+id/buttonPane1"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Blue"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:background="@drawable/stroop_button"
+                android:id="@+id/buttonPane2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Blue"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:background="@drawable/stroop_button"
+                android:id="@+id/buttonPane3"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Blue"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:background="@drawable/stroop_button"
+                android:id="@+id/buttonPane4"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
