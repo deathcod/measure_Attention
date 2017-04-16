@@ -2,19 +2,14 @@ package com.example.chinmay.project;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chinmay.project.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.example.chinmay.project.R.layout.stroop_game_play;
 
 /**
  * Created by chinmay on 06-Apr-17.
@@ -22,7 +17,7 @@ import static com.example.chinmay.project.R.layout.stroop_game_play;
 public class settings extends Activity{
 
     final String MY_PREF_NAME = "MyPrefFile";
-    SharedPreference sp = new SharedPreference();
+    SharedPreference sp = new SharedPreference("settings");
     TextView name, IP;
 
     @Override
