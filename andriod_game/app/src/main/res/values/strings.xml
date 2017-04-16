@@ -3,4 +3,11 @@
 
     <!-- Stroop game string-->
     <string name="stroop_game_instruction">Choose the correct color \nfor the given text.</string>
+    <string name="game1">Stroop</string>
+    <string name="game2">Chess</string>
+    <string name="game3">Card Game</string>
+    <string name="game4">Test Your Brain</string>
+    <string name="game5">Brain Challenge</string>
+    <string name="settings">Settings</string>
+
 </resources>
