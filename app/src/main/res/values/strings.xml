@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Project</string>
-
-    <!-- Stroop game string-->
-    <string name="stroop_game_instruction">Choose the correct color \nfor the given text.</string>
-</resources>
