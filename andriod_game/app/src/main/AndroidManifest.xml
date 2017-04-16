@@ -33,6 +33,33 @@
             android:name=".settings"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Brain_challenge.brain_game_game_screen"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Brain_challenge.brain_game_quiz_screen"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Brain_challenge.brain_game_result_screen"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Chess.chess_First_Page"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+        <activity
+            android:name=".Chess.chess_Level_Chooser"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+        <activity
+            android:name=".Chess.chess_MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
 
     </application>
 

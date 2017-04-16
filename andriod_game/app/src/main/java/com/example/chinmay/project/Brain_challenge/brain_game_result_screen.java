@@ -14,6 +14,7 @@ import com.example.chinmay.project.R;
  * Created by dell on 18/2/17.
  */
 public class brain_game_result_screen extends Activity {
+    String ACTUAL_TIME, USER_TIME, ERROR_PERCENTAGE;
     TextView t1, t2, t3;
     Button home;
 
@@ -31,13 +32,17 @@ public class brain_game_result_screen extends Activity {
         int user_timer = extras.getInt("user_time");
         double error = extras.getDouble("error_time");
 
-        t1.setText(String.format(Integer.toString(actual_timer)));
-        t2.setText(String.format(Integer.toString(user_timer)));
-        t3.setText(String.format((Double.toString(Math.abs(Math.round(error / 10.0))))) + "%");
+
+        ACTUAL_TIME = String.format(Integer.toString(actual_timer));
+        USER_TIME = String.format(Integer.toString(user_timer));
+        ERROR_PERCENTAGE = String.format((Double.toString(Math.abs(Math.round(error / 10.0))))) + "%";
+
+
+        t1.setText(ACTUAL_TIME);
+        t2.setText(USER_TIME);
+        t3.setText(ERROR_PERCENTAGE);
         home = (Button) findViewById(R.id.home);
         addListenerOnButton();
-
-
     }
 
     public void addListenerOnButton() {
