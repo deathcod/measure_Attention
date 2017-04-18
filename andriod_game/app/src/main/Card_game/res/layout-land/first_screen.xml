@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/back">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:layout_gravity="center"
+        android:id="@+id/imageView"
+        android:src="@drawable/packofcards" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Wellcome to card game"
+        android:textColor="@color/white"
+        android:id="@+id/txtTimer"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/exitBtn"
+            android:src="@drawable/cross"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/playBtn"
+            android:src="@drawable/play"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

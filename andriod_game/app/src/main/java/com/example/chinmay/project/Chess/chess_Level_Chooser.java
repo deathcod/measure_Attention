@@ -11,6 +11,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.chinmay.project.R;
+import com.example.chinmay.project.SharedPreference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class chess_Level_Chooser extends Activity {
 
@@ -38,9 +42,34 @@ public class chess_Level_Chooser extends Activity {
         back = (ImageButton) findViewById(R.id.btnBack);
         exit = (ImageButton) findViewById(R.id.btnExit);
 
+        disable_played_levels();
         addListenerOnButton();
     }
 
+    private void set_invisible(Button x, ImageButton y)
+    {
+        x.setVisibility(View.GONE);
+        y.setVisibility(View.GONE);
+    }
+
+    private void disable_played_levels()
+    {
+        String s = new SharedPreference("chess").getString( chess_Level_Chooser.this, "{\"list\" : [\"score_1\" , \"score_2\", \"score_3\", \"score_4\"]}");
+        try {
+            JSONObject j = new JSONObject(s);
+            if (!j.getString("score_1").equals(""))
+                set_invisible(l1, helpL1);
+            if (!j.getString("score_2").equals(""))
+                set_invisible(l2, helpL2);
+            if (!j.getString("score_3").equals(""))
+                set_invisible(l3, helpL3);
+            if (!j.getString("score_4").equals(""))
+                set_invisible(l4, helpL4);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void addListenerOnButton() {
 
         l1.setOnClickListener(new View.OnClickListener() {

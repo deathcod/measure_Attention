@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/level_background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select Level"
+        android:textColor="@color/white"
+        android:id="@+id/txtLevel"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="0.3"
+        android:background="@drawable/level_background">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="1&#10; LEVEL"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:id="@+id/btnLevel1"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="2&#10; LEVEL"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:id="@+id/btnLevel2"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="3&#10; LEVEL"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:id="@+id/btnLevel3"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="4&#10; LEVEL"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:id="@+id/btnLevel4"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="0.9">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/exitBtn"
+            android:src="@drawable/cross"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/helpBtn"
+            android:src="@drawable/help"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -57,6 +57,8 @@ public class brain_game_game_screen
                 Intent s = new Intent(brain_game_game_screen.this, brain_game_quiz_screen.class);
                 s.putExtra("time", time1);
                 startActivity(s);
+                finish();
+                return;
             }
         }, time1);
         //final Random r = new Random();

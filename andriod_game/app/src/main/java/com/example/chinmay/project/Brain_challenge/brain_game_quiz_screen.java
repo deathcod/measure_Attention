@@ -81,6 +81,8 @@ public class brain_game_quiz_screen extends Activity {
                     j.putExtra("error_time", total_error);
                     startActivity(j);
                 }
+                finish();
+                return;
 
             }
         });

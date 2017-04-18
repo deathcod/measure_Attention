@@ -71,6 +71,13 @@ public class SharedPreference extends Activity{
         }
     }
 
+    private void clear_shared_preferences(Context context)
+    {
+        SharedPreferences.Editor editor = context.getSharedPreferences(GAME_NAME, MODE_PRIVATE).edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public String getString(Context context, String s)
     {
         String ret = "{}";
@@ -123,7 +130,10 @@ public class SharedPreference extends Activity{
         try{
             JSONObject j = new JSONObject(s);
             String query = query_string(s);
+
+            // get the ip the user typed
             String ip = j.getString("ip");
+
             API = HOSTNAME + ip +"/" + DIR + "user/update_details.php?" + query;
 
             String response = async_response();
@@ -131,11 +141,25 @@ public class SharedPreference extends Activity{
                 return "network_error";
 
             JSONObject reply = new JSONObject(response);
+
             if (reply.get("status").equals("success"))
             {
+                // reply = {name, ip, user_id, token, datetime}
+                reply = new JSONObject(reply.getJSONArray("user").get(0).toString());
+                reply.remove("datetime");
+
+                // This is to get the token or userid if stored
+                String ss = getString(context,"{\"list\" : [\"user_id\" , \"token\"]}");
+                JSONObject j_stored = new JSONObject(ss);
+
                 for (int i = 0; i < game_names.length; i++) {
                     GAME_NAME = game_names[i];
-                    putString(context, reply.getJSONArray("user").get(0).toString());
+
+                    // Checking if the token in the shared Prefernece is not equal to the value of the token, then clear all the Shared Preference
+                    if(!j_stored.getString("token").equals(reply.getString("token")))
+                        clear_shared_preferences(context);
+
+                    putString(context, reply.toString());
                 }
 
                 ret = "updated";
