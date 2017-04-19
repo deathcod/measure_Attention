@@ -22,6 +22,7 @@ android {
         main.res.srcDirs = ['src/main/Stroop/res',
                             'src/main/Brain_challenge/res',
                             'src/main/Chess/res',
+                            'src/main/Card_game/res',
                             'src/main/res']
 
 
