@@ -1,9 +1,7 @@
 package com.example.chinmay.project.Card_game;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Game extends Activity {
+import com.example.chinmay.project.R;
+
+public class card_game_Game extends Activity {
     TextView level, timer, tScore;
     ImageView img[] = new ImageView[5];
     ImageButton a[] = new ImageButton[10];
@@ -23,23 +23,22 @@ public class Game extends Activity {
     int stopCond, score = 0;
     ImageButton back, forward;
     int times;
-    //char card_seq[] = {'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'D', 'J', 'Q'};
-    private int all_cards[] = {R.drawable.kingofclubs, R.drawable.oneofclubs, R.drawable.twoofclubs, R.drawable.threeofclubs, R.drawable.fourofclubs, R.drawable.fiveofclubs, R.drawable.sixofclubs, R.drawable.sevenofclubs, R.drawable.eightofclubs, R.drawable.nineofclubs, R.drawable.tenofclubs, R.drawable.jackofclubs, R.drawable.queenofclubs,
-            R.drawable.kingofdiamonds, R.drawable.oneofdiamonds, R.drawable.twoofdiamonds, R.drawable.threeofdiamonds, R.drawable.fourofdiamonds, R.drawable.fiveofdiamonds, R.drawable.sixofdiamonds, R.drawable.sevenofdiamonds, R.drawable.eightofdiamonds, R.drawable.nineofdiamonds, R.drawable.tenofdiamonds, R.drawable.jackofdiamonds, R.drawable.queenofdiamonds,
-            R.drawable.kingofhearts, R.drawable.oneofhearts, R.drawable.twoofhearts, R.drawable.threeofhearts, R.drawable.fourofhearts, R.drawable.fiveofhearts, R.drawable.sixofhearts, R.drawable.sevenofhearts, R.drawable.eightofhearts, R.drawable.nineofhearts, R.drawable.tenofhearts, R.drawable.jackofhearts, R.drawable.queenofhearts,
-            R.drawable.kingofspades, R.drawable.oneofspades, R.drawable.twoofspades, R.drawable.threeofspades, R.drawable.fourofspades, R.drawable.fiveofspades, R.drawable.sixofspades, R.drawable.sevenofspades, R.drawable.eightofspades, R.drawable.nineofspades, R.drawable.tenofspades, R.drawable.jackofspades, R.drawable.queenofspades};
     int buttonNum[] = {R.id.a1, R.id.a2, R.id.a3, R.id.a4, R.id.a5, R.id.a6, R.id.a7, R.id.a8, R.id.a9, R.id.a10,};
     int imageNum[] = {R.id.q1, R.id.q2, R.id.q3, R.id.q4, R.id.q5};
     int random_no_array[] = new int[10];
     int save_index[] = new int[5];
     Chronometer stopWatch;
     long startTime, countUp;
-
+    //char card_seq[] = {'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'D', 'J', 'Q'};
+    private int all_cards[] = {R.drawable.card_game_kingofclubs, R.drawable.card_game_oneofclubs, R.drawable.card_game_twoofclubs, R.drawable.card_game_threeofclubs, R.drawable.card_game_fourofclubs, R.drawable.card_game_fiveofclubs, R.drawable.card_game_sixofclubs, R.drawable.card_game_sevenofclubs, R.drawable.card_game_eightofclubs, R.drawable.card_game_nineofclubs, R.drawable.card_game_tenofclubs, R.drawable.card_game_jackofclubs, R.drawable.card_game_queenofclubs,
+            R.drawable.card_game_kingofdiamonds, R.drawable.card_game_oneofdiamonds, R.drawable.card_game_twoofdiamonds, R.drawable.card_game_threeofdiamonds, R.drawable.card_game_fourofdiamonds, R.drawable.card_game_fiveofdiamonds, R.drawable.card_game_sixofdiamonds, R.drawable.card_game_sevenofdiamonds, R.drawable.card_game_eightofdiamonds, R.drawable.card_game_nineofdiamonds, R.drawable.card_game_tenofdiamonds, R.drawable.card_game_jackofdiamonds, R.drawable.card_game_queenofdiamonds,
+            R.drawable.card_game_kingofhearts, R.drawable.card_game_oneofhearts, R.drawable.card_game_twoofhearts, R.drawable.card_game_threeofhearts, R.drawable.card_game_fourofhearts, R.drawable.card_game_fiveofhearts, R.drawable.card_game_sixofhearts, R.drawable.card_game_sevenofhearts, R.drawable.card_game_eightofhearts, R.drawable.card_game_nineofhearts, R.drawable.card_game_tenofhearts, R.drawable.card_game_jackofhearts, R.drawable.card_game_queenofhearts,
+            R.drawable.card_game_kingofspades, R.drawable.card_game_oneofspades, R.drawable.card_game_twoofspades, R.drawable.card_game_threeofspades, R.drawable.card_game_fourofspades, R.drawable.card_game_fiveofspades, R.drawable.card_game_sixofspades, R.drawable.card_game_sevenofspades, R.drawable.card_game_eightofspades, R.drawable.card_game_nineofspades, R.drawable.card_game_tenofspades, R.drawable.card_game_jackofspades, R.drawable.card_game_queenofspades};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        setContentView(R.layout.game_screen);
+        setContentView(R.layout.card_game_game_screen);
         level = (TextView) findViewById(R.id.txtLevel);
         timer = (TextView) findViewById(R.id.txtTimer);
         tScore = (TextView) findViewById(R.id.txtScore);
@@ -73,7 +72,7 @@ public class Game extends Activity {
 
             public void onFinish() {
                 for (int i = 0; i < 5; i++) {
-                    img[i].setImageResource(R.drawable.blank);
+                    img[i].setImageResource(R.drawable.card_game_blank);
                 }
                 for (int i = 0; i < 10; i++) {
                     a[i].setVisibility(View.VISIBLE);
@@ -99,6 +98,7 @@ public class Game extends Activity {
         addListenerOnButton();
 
     }
+
     public void change() {
 
 
@@ -185,7 +185,7 @@ public class Game extends Activity {
                         stopWatch.stop();
                         for (int j = 0; j < 10; j++)
                             a[j].setEnabled(false);
-                        if(score == 5)
+                        if (score == 5)
                             Toast.makeText(getApplicationContext(), "Congrates!! time taken: " + timer.getText(), Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(getApplicationContext(), "Turn Over!! time taken: " + timer.getText(), Toast.LENGTH_SHORT).show();
@@ -201,7 +201,7 @@ public class Game extends Activity {
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(Game.this, LevelChooser.class);
+                Intent i = new Intent(card_game_Game.this, card_game_LevelChooser.class);
                 i.putExtra("times", times);
                 startActivity(i);
                 finish();
@@ -210,7 +210,7 @@ public class Game extends Activity {
 
         forward.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(Game.this, LevelChooser.class);
+                Intent i = new Intent(card_game_Game.this, card_game_LevelChooser.class);
                 i.putExtra("times", 0);
                 startActivity(i);
                 finish();

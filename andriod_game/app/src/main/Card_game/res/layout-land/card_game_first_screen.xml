@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@color/back">
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
         android:layout_gravity="center"
-        android:id="@+id/imageView"
-        android:src="@drawable/packofcards" />
+        android:layout_weight="0.4"
+        android:src="@drawable/card_game_packofcards" />
 
     <TextView
+        android:id="@+id/txtTimer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Wellcome to card game"
-        android:textColor="@color/white"
-        android:id="@+id/txtTimer"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Welcome to card game"
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,26 +30,26 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/exitBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:id="@+id/exitBtn"
-            android:src="@drawable/cross"
-            android:scaleType="fitCenter"
+            android:background="@drawable/card_game_button"
             android:padding="10dp"
-            android:background="@drawable/button"
-            android:layout_margin="5dp"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/card_game_cross" />
 
         <ImageButton
+            android:id="@+id/playBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:id="@+id/playBtn"
-            android:src="@drawable/play"
+            android:background="@drawable/card_game_button"
             android:padding="5dp"
             android:scaleType="fitCenter"
-            android:background="@drawable/button"
-            android:layout_margin="5dp"/>
+            android:src="@drawable/card_game_play" />
 
     </LinearLayout>
 

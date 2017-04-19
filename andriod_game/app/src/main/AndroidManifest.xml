@@ -8,6 +8,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -17,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Project xml-->
+        <activity
+            android:name=".settings"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+
+        <!-- Stroop xml-->
         <activity
             android:name=".Stroop.stroop_game_play"
             android:screenOrientation="portrait"
@@ -29,10 +37,8 @@
             android:name=".Stroop.stroop_score_screen"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
-        <activity
-            android:name=".settings"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+
+        <!--Brain Challenge xml-->
         <activity
             android:name=".Brain_challenge.brain_game_MainActivity"
             android:screenOrientation="portrait"
@@ -49,21 +55,35 @@
             android:name=".Brain_challenge.brain_game_result_screen"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+
+        <!-- Chess game xml-->
         <activity
             android:name=".Chess.chess_First_Page"
-            android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
         <activity
             android:name=".Chess.chess_Level_Chooser"
-            android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
         <activity
             android:name=".Chess.chess_MainActivity"
-            android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+
+        <!--Card game-->
+        <activity
+            android:name=".Card_game.card_game_FirstScreen"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Card_game.card_game_LevelChooser"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Card_game.card_game_Game"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+
 
     </application>
 

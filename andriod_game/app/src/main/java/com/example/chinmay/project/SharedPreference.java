@@ -125,7 +125,7 @@ public class SharedPreference extends Activity{
 
     public String set_settings(Context context, String s)
     {
-        String game_names[] = {"stroop", "chess", "settings"};
+        String game_names[] = {"stroop", "chess", "settings", "card_game"};
         String ret = null;
         try{
             JSONObject j = new JSONObject(s);
@@ -238,6 +238,43 @@ public class SharedPreference extends Activity{
             e.printStackTrace();
         }
         return ret;
+    }
 
+    public String set_card_game_score(Context context, String score, String time, String level) {
+        String s = "{" + "\"score_" + level + "\":\"" + score + "\", \"time_" + level + "\":\"" + time + "\"}";
+
+        putString(context, s);
+
+        String ret = "error";
+        try {
+            s = getString(context, "{\"list\" : [\"user_id\" , \"token\", \"ip\", \"score_1\" , \"score_2\", \"score_3\", \"score_4\", \"time_1\" , \"time_2\", \"time_3\", \"time_4\"]}");
+            JSONObject j = new JSONObject(s);
+            if (j.getString("score_1").equals("") ||
+                    j.getString("score_2").equals("") ||
+                    j.getString("score_3").equals("") ||
+                    j.getString("score_4").equals(""))
+                return null;
+
+            if (j.getString("ip").equals(""))
+                return "IP not set";
+
+            IP = j.getString("ip") + "/";
+            API = HOSTNAME + IP + DIR + GAME_NAME + "/score_add.php?" + query_string(j.toString());
+            String response = async_response();
+            if (response == null)
+                return "network_error";
+
+            JSONObject reply = new JSONObject(response);
+            ret = reply.getString("remark");
+
+            if (reply.getString("status").equals("success")) {
+                s = "{ \"score_1\" : \"\", \"score_2\" : \"\", \"score_3\" : \"\", \"score_4\" : \"\"}";
+                putString(context, s);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 }
