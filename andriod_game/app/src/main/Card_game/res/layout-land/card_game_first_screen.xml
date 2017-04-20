@@ -12,7 +12,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="0.4"
+<<<<<<< HEAD:andriod_game/app/src/main/Card_game/res/layout-land/card_game_first_screen.xml
         android:src="@drawable/card_game_packofcards" />
+=======
+        android:src="@drawable/packofcards" />
+>>>>>>> origin/master:andriod_game/app/src/main/Card_game/res/layout-land/first_screen.xml
 
     <TextView
         android:id="@+id/txtTimer"
@@ -20,7 +24,11 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
+<<<<<<< HEAD:andriod_game/app/src/main/Card_game/res/layout-land/card_game_first_screen.xml
         android:text="Welcome to card game"
+=======
+        android:text="Wellcome to card game"
+>>>>>>> origin/master:andriod_game/app/src/main/Card_game/res/layout-land/first_screen.xml
         android:textColor="@color/white" />
 
     <LinearLayout
@@ -35,10 +43,17 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+<<<<<<< HEAD:andriod_game/app/src/main/Card_game/res/layout-land/card_game_first_screen.xml
             android:background="@drawable/card_game_button"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/card_game_cross" />
+=======
+            android:background="@drawable/button"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cross" />
+>>>>>>> origin/master:andriod_game/app/src/main/Card_game/res/layout-land/first_screen.xml
 
         <ImageButton
             android:id="@+id/playBtn"
@@ -46,10 +61,17 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+<<<<<<< HEAD:andriod_game/app/src/main/Card_game/res/layout-land/card_game_first_screen.xml
             android:background="@drawable/card_game_button"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/card_game_play" />
+=======
+            android:background="@drawable/button"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play" />
+>>>>>>> origin/master:andriod_game/app/src/main/Card_game/res/layout-land/first_screen.xml
 
     </LinearLayout>
 
