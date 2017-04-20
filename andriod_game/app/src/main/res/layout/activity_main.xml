@@ -42,7 +42,8 @@
         android:layout_weight="1"
         android:background="@color/brown"
         android:text="@string/game4"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:id="@+id/test_your_brain"/>
 
     <Button
         android:id="@+id/brain_game"

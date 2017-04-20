@@ -23,6 +23,7 @@ android {
                             'src/main/Brain_challenge/res',
                             'src/main/Chess/res',
                             'src/main/Card_game/res',
+                            'src/main/Test_your_brain/res',
                             'src/main/res']
 
 

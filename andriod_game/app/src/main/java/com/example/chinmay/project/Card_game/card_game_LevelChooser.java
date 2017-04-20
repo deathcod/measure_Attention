@@ -11,6 +11,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.chinmay.project.R;
+import com.example.chinmay.project.SharedPreference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class card_game_LevelChooser extends Activity {
@@ -42,7 +46,27 @@ public class card_game_LevelChooser extends Activity {
         l3 = (Button) findViewById(R.id.btnLevel3);
         l4 = (Button) findViewById(R.id.btnLevel4);
 
+        disable_played_levels();
         addListenerOnButton();
+
+    }
+
+    private void disable_played_levels()
+    {
+        String s = new SharedPreference("card").getString( card_game_LevelChooser.this, "{\"list\" : [\"score_1\" , \"score_2\", \"score_3\", \"score_4\"]}");
+        try {
+            JSONObject j = new JSONObject(s);
+            if (!j.getString("score_1").equals(""))
+                l1.setVisibility(View.GONE);
+            if (!j.getString("score_2").equals(""))
+                l2.setVisibility(View.GONE);
+            if (!j.getString("score_3").equals(""))
+                l3.setVisibility(View.GONE);
+            if (!j.getString("score_4").equals(""))
+                l4.setVisibility(View.GONE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addListenerOnButton() {

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/background">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Turn Sound On/Off"
+        android:id="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="5dp"/>
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageSound"
+        android:src="@drawable/test_your_brain_note_red"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@null"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volume"
+        android:id="@+id/txtVolume"
+        android:layout_alignBottom="@+id/seekBarVolume"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="5dp"/>
+
+    <SeekBar
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarVolume"
+        android:layout_below="@+id/imageSound"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+           android:layout_width="100dp"
+           android:layout_height="30dp"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:text="Set Time"
+           android:id="@+id/textView2"
+           android:layout_alignLeft="@+id/textView"
+           android:layout_below="@+id/txtVolume"
+           android:layout_marginTop="30dp"/>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="430dp"
+       android:layout_height="40dp"
+       android:orientation="horizontal"
+       android:id="@+id/radioGroup"
+        android:layout_below="@+id/seekBarVolume"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true">
+
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="30 sec"
+           android:id="@+id/radioButton30"
+           android:onClick="onRadioButtonClicked"
+           android:layout_marginLeft="15dp"/>
+
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="60 sec"
+           android:id="@+id/radioButton60"
+           android:onClick="onRadioButtonClicked"
+           android:layout_alignLeft="@+id/imageSound"
+           android:layout_marginLeft="15dp"/>
+
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="90 sec"
+           android:id="@+id/radioButton90"
+           android:onClick="onRadioButtonClicked"
+           android:layout_marginLeft="15dp"/>
+
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="120 sec"
+           android:id="@+id/radioButton120"
+           android:onClick="onRadioButtonClicked"
+           android:layout_alignTop="@+id/radioButton60"
+           android:layout_toRightOf="@+id/radioButton60"
+           android:layout_marginLeft="15dp"/>
+
+    </RadioGroup>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="High Scores"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="25dp"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:text="Show"
+            android:id="@+id/btnShow"
+            android:layout_below="@+id/textView2"
+            android:layout_toRightOf="@+id/textView3"
+            android:layout_marginLeft="60dp"
+            android:layout_alignTop="@+id/textView3"
+            />
+
+        <Button
+           android:layout_width="70dp"
+           android:layout_height="40dp"
+           android:text="Reset"
+           android:id="@+id/btnReset"
+           android:layout_alignBottom="@+id/btnShow"
+           android:layout_marginLeft="60dp"
+           android:layout_toRightOf="@+id/btnShow"
+            />
+
+       <Button
+           android:layout_width="190dp"
+           android:layout_height="40dp"
+           android:id="@+id/btnExitSet"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+           android:text="Save Settings"
+           android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>

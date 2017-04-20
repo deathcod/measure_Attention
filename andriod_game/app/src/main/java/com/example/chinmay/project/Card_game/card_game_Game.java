@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chinmay.project.R;
+import com.example.chinmay.project.SharedPreference;
 
 public class card_game_Game extends Activity {
     TextView level, timer, tScore;
@@ -186,10 +187,11 @@ public class card_game_Game extends Activity {
                         for (int j = 0; j < 10; j++)
                             a[j].setEnabled(false);
                         if (score == 5)
-                            Toast.makeText(getApplicationContext(), "Congrates!! time taken: " + timer.getText(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Congrates!! time taken: " +Long.toString(SystemClock.elapsedRealtime()-startTime) +"ms", Toast.LENGTH_SHORT).show();
                         else
-                            Toast.makeText(getApplicationContext(), "Turn Over!! time taken: " + timer.getText(), Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getApplicationContext(), "Turn Over!! time taken: " + Long.toString(SystemClock.elapsedRealtime()-startTime) +"ms", Toast.LENGTH_SHORT).show();
+                        String remark = new SharedPreference("card").set_card_game_score(card_game_Game.this, Integer.toString(score), Long.toString(SystemClock.elapsedRealtime()-startTime), Integer.toString(l));
+                        if (remark != null)                            Toast.makeText(card_game_Game.this, remark, Toast.LENGTH_SHORT).show();
                         stopWatch.setText(String.format("%s:%s", String.format("%02d", 0), String.format("%02d", 0)));
                         back.setVisibility(View.VISIBLE);
                         forward.setVisibility(View.VISIBLE);

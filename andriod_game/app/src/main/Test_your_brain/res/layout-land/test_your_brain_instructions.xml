@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingRight="50dp"
+    android:paddingLeft="50dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:background="#0a676a">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="INSTRUCTIONS"
+        android:textColor="#ffffff"
+        android:id="@+id/txtIns"
+        android:gravity="center"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/txtIns2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:layout_weight="0.5"
+        android:background="@drawable/test_your_brain_button"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/exitButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/test_your_brain_powerbutton"
+            android:scaleType="fitCenter"
+            android:background="@drawable/test_your_brain_button"
+            android:padding="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/test_your_brain_backmedium"
+            android:scaleType="fitCenter"
+            android:background="@drawable/test_your_brain_button"
+            android:padding="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/playButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/test_your_brain_play"
+            android:scaleType="fitCenter"
+            android:background="@drawable/test_your_brain_button"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

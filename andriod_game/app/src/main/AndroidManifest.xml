@@ -70,7 +70,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
 
-        <!--Card game-->
+        <!--Card game xml-->
         <activity
             android:name=".Card_game.card_game_FirstScreen"
             android:screenOrientation="landscape"
@@ -84,7 +84,27 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
 
-
+        <!-- Test your brain xml-->
+        <activity
+            android:name=".Test_your_brain.test_your_brain_FirstPage"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Test_your_brain.test_your_brain_LevelChooser"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Test_your_brain.test_your_brain_MyAndroidAppActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Test_your_brain.test_your_brain_Settings"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
+        <activity
+            android:name=".Test_your_brain.test_your_brain_StartActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
     </application>
 
 </manifest>

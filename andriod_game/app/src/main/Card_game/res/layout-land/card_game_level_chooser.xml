@@ -23,49 +23,86 @@
         android:background="@drawable/card_game_level_background"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnLevel1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/card_game_button"
-            android:text="1&#10; LEVEL"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <Button
-            android:id="@+id/btnLevel2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/card_game_button"
-            android:text="2&#10; LEVEL"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            <Button
+                android:id="@+id/btnLevel1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_game_button"
+                android:text="1&#10; LEVEL"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/btnLevel3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/card_game_button"
-            android:text="3&#10; LEVEL"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLevel4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/card_game_button"
-            android:text="4&#10; LEVEL"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btnLevel2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_game_button"
+                android:text="2&#10; LEVEL"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btnLevel3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_game_button"
+                android:text="3&#10; LEVEL"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btnLevel4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_game_button"
+                android:text="4&#10; LEVEL"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

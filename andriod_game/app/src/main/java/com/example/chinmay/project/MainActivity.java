@@ -10,10 +10,11 @@ import com.example.chinmay.project.Brain_challenge.brain_game_MainActivity;
 import com.example.chinmay.project.Card_game.card_game_FirstScreen;
 import com.example.chinmay.project.Chess.chess_First_Page;
 import com.example.chinmay.project.Stroop.stroop_game_play;
+import com.example.chinmay.project.Test_your_brain.test_your_brain_FirstPage;
 
 public class MainActivity extends Activity {
 
-    Button stroop, settings, brain_game, chess, card_game;
+    Button stroop, settings, brain_game, chess, card_game, test_your_brain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
         brain_game = (Button) findViewById(R.id.brain_game);
         chess = (Button) findViewById(R.id.chess);
         card_game = (Button) findViewById(R.id.card_game);
+        test_your_brain = (Button) findViewById(R.id.test_your_brain);
         settings = (Button) findViewById(R.id.settings);
 
         addListenerOnButton();
@@ -58,6 +60,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, card_game_FirstScreen.class);
+                startActivity(i);
+            }
+        });
+
+        test_your_brain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, test_your_brain_FirstPage.class);
                 startActivity(i);
             }
         });
