@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Measure Attention</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Stroop</string>
+    <string name="nav_photos">Chess</string>
+    <string name="nav_movies">Card Game</string>
+    <string name="nav_notifications">Test your Brain</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about_us">About Us</string>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Stroop</item>
+        <item>Chess</item>
+        <item>Card Game</item>
+        <item>Test your Brain</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <!-- Game short description -->
+    <string name="detail_stroop">Based on the standard STROOP task, in this game a person has to identify the colour of the text.</string>
+    <string name="detail_chess">Based on SPAN task, in this game a person has to recall six objects in the order mentioned.</string>
+    <string name="detail_card">Based on SPAN task, in this game a person has to recall 5 out of 10 objects shown previously in random order.</string>
+    <string name="detail_test">Based on the concept of PAIRED CANCELLATION task, in this game a person has to correctly identify the presence of two images in order.</string>
+
+
+    <!-- The instruction for stroop game-->
+    <string name="stroop_ins_L1">Choose the CORRECT COLOR \nfor the given text.</string>
+
+    <!-- The instruction for card game-->
+    <string name="card_game_ins_L1">Instruction card game level 1</string>
+    <string name="card_game_ins_L2">Instruction card game level 2</string>
+    <string name="card_game_ins_L3">Instruction card game level 3</string>
+    <string name="card_game_ins_L4">Instruction card game level 4</string>
+
+    <!-- The instruction for chess game-->
+    <string name="chess_ins_L1">6 types of chess objects shall appear in the screen for 10 seconds. Try to remember the \'left to right order\' in which they appear</string>
+    <string name="chess_ins_L2">6 types of chess objects shall appear in the screen for 10 seconds. Try to remember the \'right to left order\' in which they appear</string>
+    <string name="chess_ins_L3">6 types of chess objects shall appear in the screen for 10 seconds. Try to remember the \'left to right order\' in which they appear</string>
+    <string name="chess_ins_L4">6 types of chess objects shall appear in the screen for 10 seconds. Try to remember the \'right to left order\' in which they appear</string>
+
+    <!-- The instruction for test your brain game-->
+    <string name="test_your_brain_ins_L1">One image presented in hexagonal shape and three images presented in square shape appear in the screen. If the image present in hexagonal shape is present among the images presented in square shapes, tap on the green tick button. Otherwise tap on the red cross button.</string>
+    <string name="test_your_brain_ins_L2">Two images presented in hexagonal shape and three images presented in square shape appear in the screen. If both the images present in hexagonal shape are present among the images presented in square shapes, tap on the green tick button. Otherwise tap on the red cross button</string>
+    <string name="test_your_brain_ins_L3">Two images presented in hexagonal shape and three images presented in square shape appear in the screen. If both the images present in hexagonal shape are present among the images presented in square shapes in “left to right order” tap on the green tick button. Otherwise tap on the red cross button.</string>
+    <string name="test_your_brain_ins_L4">Two images presented in hexagonal shape and three images presented in square shape appear in the screen. If both the images present in hexagonal shape are present among the images presented in square shapes in “right to left order” tap on the green tick button. Otherwise tap on the red cross button.</string>
+    <string name="test_your_brain_ins_L5">Two images presented in hexagonal shape and three images presented in square shape appear in the screen. If both the images present in hexagonal shape are present among the images presented in square shapes in the order indicated by the violet arrow that appears showing left or right randomly on the screen each turn, tap on the green tick button to score. Otherwise tap on the red cross button.</string>
+
+    <!-- dialogs -->
+    <string name="cs">Connecting server...</string>
+    <string name="l">Loading...</string>
+    <string name="sd">Saving data..</string>
+
+</resources>
