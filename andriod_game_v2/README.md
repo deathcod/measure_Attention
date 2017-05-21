@@ -11,6 +11,24 @@ for setting up the menu item to get open
 getSupportFragmentManager()  
 This does an interesting job so when ever we click the menu framgment manager stores the fragment under a tag and loads the fragment. benifit if we have to check if the fragment is visited we can check from the tag name itself
 
+### USING GIFVIEW
+
+```xml
+<info.androidhive.navigationdrawer.other.GIFView
+    android:id = "@id/my_gif_picture_id"
+    android:layout_width = "wrap_content"
+    android:layout_height = "wrap_content"
+/>
+```
+
+Apply this in the xml to use the gif 
+and in the java code.
+```
+GIFView gifview = (GIFView) findViewById(R.id.my_gif_picture_id) 
+gifview.setGIFResource(R.drawable.my_gif_picture)
+```
+Here ```my_gif_picture``` is the picture to be applied in the layout.
+
 _____
 
 ## PROBLEM FACED
