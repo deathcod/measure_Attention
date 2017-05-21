@@ -2,20 +2,20 @@
 
 * app_bar_main.xml gives the game_name, profile picture, and game_description.
 
-MainActivity
+MainActivity  
 LoadNavHead() is for loading the profile,background,game_name,game_description
 
-setUpNavigationView()
+setUpNavigationView()  
 for setting up the menu item to get open
 
-getSupportFragmentManager()
+getSupportFragmentManager()  
 This does an interesting job so when ever we click the menu framgment manager stores the fragment under a tag and loads the fragment. benifit if we have to check if the fragment is visited we can check from the tag name itself
 
 _____
 
 ## PROBLEM FACED
 
-1)  So first when I was dealing with fragments the problem was I didnt understood the concept of fragments and thought as a simple layout. So there was a situation when I had to replace one fragment with another but the problem was this is it be done on click button. Now coding point of view if I have to make changes on the fragment I have to do it in the mainActivity itself but if I am doing inside the java class it was not working + this should not be the coding style as it can create problem later.
+**1)  So first when I was dealing with fragments the problem was I didnt understood the concept of fragments and thought as a simple layout. So there was a situation when I had to replace one fragment with another but the problem was this is it be done on click button. Now coding point of view if I have to make changes on the fragment I have to do it in the mainActivity itself but if I am doing inside the java class it was not working + this should not be the coding style as it can create problem later.**
 
 But still to complete the task quickly I did something like this inside the OnCreateView()
 
@@ -45,7 +45,7 @@ I was saving the button view on a variable and was accessing that variable as a 
 After realising this fault, now I came to the same previous code and added fragmenttransaction code inside the button onclick and IT IS WORKING.. now thinking why didnt I do it earlier :P
 
 
-2) This was the problem of how to send the data to the server and also the approach should be able to handle dynamicity and also clean code.
+**2) This was the problem of how to send the data to the server and also the approach should be able to handle dynamicity and also clean code.**
 
 So to start thinking I created a JSONObject class(StoreOnClick) but the problem is now to make the class robust so that it can handle query efficiently and make json.
 
@@ -76,7 +76,7 @@ where JA stands for creation of JSONArray object. Actually both are created but 
 
 The actual benifit can be reflected when loading of the JSON object is done. So after mentioning the selection type "JA" or "JO" then the work will be done according to the selection type. And when getString is called, it will return the string according to the selection type.
 
-3) This was an error which I faced while I was updating the Setting page, So now I am trying to install material design in my setting page. first problem was how to change the color of the editView text --> hint, linebar so for that I searched and finally concluded can be done intresting by adding a style for the editView.
+**3) This was an error which I faced while I was updating the Setting page, So now I am trying to install material design in my setting page. first problem was how to change the color of the editView text --> hint, linebar so for that I searched and finally concluded can be done intresting by adding a style for the editView.**
 
 the style was:
 
