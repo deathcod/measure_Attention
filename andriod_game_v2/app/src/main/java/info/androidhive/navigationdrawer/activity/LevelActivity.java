@@ -35,7 +35,6 @@ public class LevelActivity extends Activity {
 
         //LEVEL text set
         TextView game_level_view = (TextView) findViewById(R.id.game_level);
-//        game_level_view.setText("LEVEL "+game_level);
         game_level_view.setText(game_level);
 
         //LEVEL instruction set

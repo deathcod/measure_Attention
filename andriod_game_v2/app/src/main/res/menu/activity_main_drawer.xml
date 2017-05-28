@@ -4,21 +4,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_stroop"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/nav_home" />
+            android:icon="@drawable/rainbow"
+            android:title="@string/nav_stroop" />
         <item
             android:id="@+id/nav_chess"
-            android:icon="@drawable/ic_photo_library_black_24dp"
-            android:title="@string/nav_photos" />
+            android:icon="@drawable/chess"
+            android:title="@string/nav_chess" />
         <item
             android:id="@+id/nav_card_game"
-            android:icon="@drawable/ic_local_movies_black_24dp"
-            android:title="@string/nav_movies" />
+            android:icon="@drawable/cards"
+            android:title="@string/nav_card_game" />
 
         <item
             android:id="@+id/nav_tesr_your_brain"
-            android:icon="@drawable/ic_notifications_black_24dp"
-            android:title="@string/nav_notifications" />
+            android:icon="@drawable/brain"
+            android:title="@string/nav_test_your_brain" />
 
         <item
             android:id="@+id/nav_settings"

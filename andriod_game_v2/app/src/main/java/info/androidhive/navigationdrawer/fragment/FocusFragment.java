@@ -75,7 +75,7 @@ public class FocusFragment extends Fragment {
         // Inflate the layout for this fragment
         LinearLayout mL = (LinearLayout) inflater.inflate(R.layout.focus_fragment, container, false);
         GIFView gifView = (GIFView) mL.findViewById(R.id.focus_gif);
-        gifView.setGIFResource(R.drawable.focus);
+        gifView.setGIFResource(R.drawable.focus1);
         return mL;
     }
 

@@ -1,6 +1,7 @@
 package info.androidhive.navigationdrawer.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,10 @@ public class MainFragment extends Fragment {
         return fragment;
     }
 
+    public static int getStringIdentifier(Context context, String resource, String name) {
+        return context.getResources().getIdentifier(name, resource, context.getPackageName());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +85,10 @@ public class MainFragment extends Fragment {
 
             default:
                 mL = (LinearLayout) inflater.inflate(R.layout.main_fragment, container, false);
-                TextView game_name = (TextView) mL.findViewById(R.id.game_name);
+                TextView game_instruction = (TextView) mL.findViewById(R.id.game_name);
                 GIFView gifView = (GIFView) mL.findViewById(R.id.nature_gif);
-                gifView.setGIFResource(R.drawable.nature);
-                game_name.setText(mParam1);
+                gifView.setGIFResource(R.drawable.nature1);
+                game_instruction.setText(getStringIdentifier(getActivity(), "string", "detail_" + mParam1));
                 final Button button = (Button) mL.findViewById(R.id.game_enter);
                 button.setText("ENTER");
                 button.setOnClickListener(new View.OnClickListener() {

@@ -15,7 +15,7 @@ public class JSONData {
 
 
     //Created a new private json object
-    //sekect here defines the purpose, is JSONArray to be used or JSONOBject.
+    //select here defines the purpose, is JSONArray to be used or JSONOBject.
     public JSONData(String select) {
         this.JA = new JSONArray();
         this.JO = new JSONObject();
