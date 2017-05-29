@@ -169,7 +169,7 @@ public class chess_game_screen extends Activity {
         final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
         if (l > 3) {
             sp.set_game_score(chess_game_screen.this, data.get_data_JA());
-            sp.async_response_modified();
+            sp.async_response_modified(chess_game_screen.this);
         }
         final ProgressDialog progressDialog = new ProgressDialog(chess_game_screen.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -182,16 +182,16 @@ public class chess_game_screen extends Activity {
                     public void run() {
 
                         startActivity(i);
-                        if (l > 3) {
-                            if (sp.fetchData.flag == 0)
-                                Toast.makeText(chess_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
-                            else
-                                Toast.makeText(chess_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
-                        }
+//                        if (l > 3) {
+//                            if (sp.fetchData.flag == 0)
+//                                Toast.makeText(chess_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
+//                            else
+//                                Toast.makeText(chess_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
+//                        }
                         finish();
                         progressDialog.dismiss();
                     }
-                }, (l <= 3) ? 1000 : 6000);
+                }, (l <= 3) ? 1000 : 5000);
 
 
     }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -114,7 +113,7 @@ public class stroop_game_screen extends Activity {
 
             final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
             sp.set_game_score(stroop_game_screen.this, data.get_data_JA());
-            sp.async_response_modified();
+            sp.async_response_modified(stroop_game_screen.this);
 
             final ProgressDialog progressDialog = new ProgressDialog(stroop_game_screen.this,
                     R.style.AppTheme_Dark_Dialog);
@@ -126,15 +125,15 @@ public class stroop_game_screen extends Activity {
                     new Runnable() {
                         public void run() {
                             startActivity(i);
-                            if (sp.fetchData.flag == 0)
-                                Toast.makeText(stroop_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
-                            else
-                                Toast.makeText(stroop_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
+//                            if (sp.fetchData.flag == 0)
+//                                Toast.makeText(stroop_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
+//                            else
+//                                Toast.makeText(stroop_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
                             //Toast.makeText(stroop_game_screen.this, remark, Toast.LENGTH_LONG).show();
                             finish();
                             progressDialog.dismiss();
                         }
-                    }, 6000);
+                    }, 5000);
 
         }
 

@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
@@ -220,7 +219,7 @@ public class MainFragment extends Fragment {
                 i.putExtra("data", x.get_data_string());
 
                 sp.set_settings(x.get_data_string_without_intend());
-                sp.async_response_modified();
+                sp.async_response_modified(getActivity());
 
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                         R.style.AppTheme_Dark_Dialog);
@@ -233,14 +232,12 @@ public class MainFragment extends Fragment {
                             public void run() {
                                 startActivity(i);
 
-                                //checking if the the has respomded or not
+                                //checking if the data has responded or not
                                 if (sp.fetchData.flag == 0)
-                                    Toast.makeText(getActivity(), "network_error", Toast.LENGTH_SHORT).show();
-                                else
-                                    Toast.makeText(getActivity(), sp.set_settings_after_call(getActivity()), Toast.LENGTH_SHORT).show();
+                                    sp.set_settings_after_call(getActivity());
                                 progressDialog.dismiss();
                             }
-                        }, 6000);
+                        }, 5000);
 
             }
         });

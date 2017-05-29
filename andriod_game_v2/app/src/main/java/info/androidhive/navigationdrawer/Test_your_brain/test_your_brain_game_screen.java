@@ -37,7 +37,7 @@ public class test_your_brain_game_screen extends Activity {
     int position = 0, orientation;
     int posS[] = new int[6];
     int level;
-    int totalTime = 10000;
+    int totalTime = 60000;
     boolean status = true;
     int soundStatus = 1;
     int volume = 100;
@@ -147,7 +147,7 @@ public class test_your_brain_game_screen extends Activity {
                     sp.set_game_score(test_your_brain_game_screen.this, data.get_data_JA());
                     i.removeExtra("data");
                     i.putExtra("data", sp.get_API() + "\n\n" + sp.get_DATA());
-                    sp.async_response_modified();
+                    sp.async_response_modified(test_your_brain_game_screen.this);
                 }
                 final ProgressDialog progressDialog = new ProgressDialog(test_your_brain_game_screen.this,
                         R.style.AppTheme_Dark_Dialog);
@@ -160,13 +160,13 @@ public class test_your_brain_game_screen extends Activity {
                             public void run() {
 
                                 startActivity(i);
-                                if (level > 4) {
-                                    Toast.makeText(test_your_brain_game_screen.this, sp.get_game_score_after_call(), Toast.LENGTH_SHORT).show();
-                                }
+//                                if (level > 4) {
+//                                    Toast.makeText(test_your_brain_game_screen.this, sp.get_game_score_after_call(), Toast.LENGTH_SHORT).show();
+//                                }
                                 finish();
                                 progressDialog.dismiss();
                             }
-                        }, (level <= 4) ? 1000 : 6000);
+                        }, (level <= 4) ? 1000 : 5000);
 
 
             }

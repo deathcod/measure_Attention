@@ -38,8 +38,8 @@ public class SharedPreference extends Activity {
         HOSTNAME = "http://";
     }
 
-    public void async_response_modified() {
-        fetchData = new FetchData(API, DATA);
+    public void async_response_modified(Context context) {
+        fetchData = new FetchData(context, API, DATA);
         fetchData.execute();
     }
 

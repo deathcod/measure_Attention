@@ -1,9 +1,13 @@
 package info.androidhive.navigationdrawer.other;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,10 +26,12 @@ public class FetchData extends AsyncTask<Void, Void, String> {
 
     public int flag;
     private String API, JSON, DATA;
+    private Context context;
 
-    public FetchData(String API, String DATA) {
+    public FetchData(Context context, String API, String DATA) {
         this.API = API;
         this.DATA = DATA;
+        this.context = context;
         JSON = "{}";
         flag = 0;
     }
@@ -48,11 +54,12 @@ public class FetchData extends AsyncTask<Void, Void, String> {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
-            urlConnection.setInstanceFollowRedirects(false);
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postLength));
             urlConnection.setUseCaches(false);
+            urlConnection.setConnectTimeout(20000);
+            urlConnection.setReadTimeout(20000);
 
             try (DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream())) {
                 wr.write(postData);
@@ -76,12 +83,21 @@ public class FetchData extends AsyncTask<Void, Void, String> {
             }
 
             if (buffer.length() == 0) {
+                //if failure show timeout
+                CreateToken(context, "TimeOut");
                 return null;
             }
             forecastJsonStr = buffer.toString();
             this.JSON = forecastJsonStr;
             this.flag = 1;
+
+            //if successful show the remark
+            JSONObject j = new JSONObject(this.JSON);
+            CreateToken(context, j.getString("remark"));
+
             return forecastJsonStr;
+        } catch (java.net.SocketTimeoutException e) {
+            return null;
         } catch (Exception e) {
             Log.e("PlaceholderFragment", "Error ", e);
             return null;
@@ -101,5 +117,10 @@ public class FetchData extends AsyncTask<Void, Void, String> {
 
     public String get_JSON() {
         return JSON;
+    }
+
+    //Show the token of response
+    private void CreateToken(Context context, String remark) {
+        Toast.makeText(context, remark, Toast.LENGTH_SHORT).show();
     }
 }
