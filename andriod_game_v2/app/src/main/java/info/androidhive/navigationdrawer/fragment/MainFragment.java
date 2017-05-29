@@ -14,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.GIFView;
 import info.androidhive.navigationdrawer.other.JSONData;
+import info.androidhive.navigationdrawer.other.SharedPreference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,7 +89,7 @@ public class MainFragment extends Fragment {
                 mL = (LinearLayout) inflater.inflate(R.layout.main_fragment, container, false);
                 TextView game_instruction = (TextView) mL.findViewById(R.id.game_name);
                 GIFView gifView = (GIFView) mL.findViewById(R.id.nature_gif);
-                gifView.setGIFResource(R.drawable.nature1);
+                gifView.setGIFResource(R.drawable.nature);
                 game_instruction.setText(getStringIdentifier(getActivity(), "string", "detail_" + mParam1));
                 final Button button = (Button) mL.findViewById(R.id.game_enter);
                 button.setText("ENTER");
@@ -117,6 +119,28 @@ public class MainFragment extends Fragment {
         final RadioGroup hand = (RadioGroup) mL.findViewById(R.id.hand);
         final TextView IP = (TextView) mL.findViewById(R.id.IP);
         Button send_data = (Button) mL.findViewById(R.id.send_data);
+
+        //calling the shared preference
+        final SharedPreference sp = new SharedPreference("settings");
+        if (!sp.get_one_String(getActivity(), "user_id").equals("")) {
+            name.setText(sp.get_one_String(getActivity(), "name"));
+            email.setText(sp.get_one_String(getActivity(), "email"));
+            college.setText(sp.get_one_String(getActivity(), "college"));
+            semester.setText(sp.get_one_String(getActivity(), "semester"));
+            age.setText(sp.get_one_String(getActivity(), "age"));
+            IP.setText(sp.get_one_String(getActivity(), "ip"));
+            send_data.setText("update");
+
+            if (sp.get_one_String(getActivity(), "sex").equals("male"))
+                sex.check(sex.getChildAt(0).getId());
+            else
+                sex.check(sex.getChildAt(1).getId());
+
+            if (sp.get_one_String(getActivity(), "hand").equals("right"))
+                hand.check(hand.getChildAt(0).getId());
+            else
+                hand.check(hand.getChildAt(1).getId());
+        }
 
         send_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,10 +177,10 @@ public class MainFragment extends Fragment {
                     flag_fail = true;
                 } else
                     semester.setError(null);
+                age.setError("enter a valid age");
 
                 //age check
                 if (age.getText().toString().isEmpty()) {
-                    age.setError("enter a valid age");
                     flag_fail = true;
                 } else if (Integer.parseInt(age.getText().toString()) > 123 || Integer.parseInt(age.getText().toString()) < 1) {
                     age.setError("why don't you apply in Guinness Book!!");
@@ -181,18 +205,22 @@ public class MainFragment extends Fragment {
                 x.set_extra_data("college", college.getText().toString().trim());
                 x.set_extra_data("semester", semester.getText().toString().trim());
                 x.set_extra_data("age", age.getText().toString().trim());
-                x.set_extra_data("IP", IP.getText().toString().trim());
+                x.set_extra_data("ip", IP.getText().toString().trim());
+                x.set_extra_data("token", sp.get_one_String(getActivity(), "token"));
 
                 int selectedId = sex.getCheckedRadioButtonId();
                 Button radioButtonSex = (RadioButton) mL.findViewById(selectedId);
-                x.set_extra_data("sex", radioButtonSex.getText().toString());
+                x.set_extra_data("sex", radioButtonSex.getText().toString().toLowerCase());
 
                 selectedId = hand.getCheckedRadioButtonId();
                 Button radioButtonHand = (RadioButton) mL.findViewById(selectedId);
-                x.set_extra_data("hand", radioButtonHand.getText().toString());
+                x.set_extra_data("hand", radioButtonHand.getText().toString().toLowerCase());
 
                 final Intent i = new Intent(getActivity(), ScoreActivity.class);
                 i.putExtra("data", x.get_data_string());
+
+                sp.set_settings(x.get_data_string_without_intend());
+                sp.async_response_modified();
 
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                         R.style.AppTheme_Dark_Dialog);
@@ -203,11 +231,16 @@ public class MainFragment extends Fragment {
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
-
                                 startActivity(i);
+
+                                //checking if the the has respomded or not
+                                if (sp.fetchData.flag == 0)
+                                    Toast.makeText(getActivity(), "network_error", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(getActivity(), sp.set_settings_after_call(getActivity()), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
-                        }, 3000);
+                        }, 6000);
 
             }
         });

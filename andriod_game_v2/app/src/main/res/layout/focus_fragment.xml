@@ -3,12 +3,17 @@
     android:id="@+id/concentration"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <info.androidhive.navigationdrawer.other.GIFView
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/focus" />
+    <!--<info.androidhive.navigationdrawer.other.GIFView
         android:id="@+id/focus_gif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" />-->
 </LinearLayout>

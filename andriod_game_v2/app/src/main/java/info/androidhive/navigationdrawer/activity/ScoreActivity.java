@@ -20,7 +20,9 @@ public class ScoreActivity extends Activity {
         setContentView(R.layout.activity_score);
 
         Bundle b1 = getIntent().getExtras();
-        String s = b1.getString("data");
+        String s = Integer.toString(b1.getString("data").length());
+        s += "\n\n" + b1.getString("data");
+
         TextView t1 = (TextView) findViewById(R.id.score);
         t1.setMovementMethod(new ScrollingMovementMethod());
         t1.setText(s);

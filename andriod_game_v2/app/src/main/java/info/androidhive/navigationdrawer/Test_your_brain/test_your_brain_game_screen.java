@@ -21,6 +21,7 @@ import info.androidhive.navigationdrawer.activity.LevelActivity;
 import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.JSONData;
+import info.androidhive.navigationdrawer.other.SharedPreference;
 
 
 public class test_your_brain_game_screen extends Activity {
@@ -36,7 +37,7 @@ public class test_your_brain_game_screen extends Activity {
     int position = 0, orientation;
     int posS[] = new int[6];
     int level;
-    int totalTime = 60000;
+    int totalTime = 10000;
     boolean status = true;
     int soundStatus = 1;
     int volume = 100;
@@ -111,8 +112,8 @@ public class test_your_brain_game_screen extends Activity {
 
         CountDownTimer cT = new CountDownTimer(totalTime, 1000) {
             public void onTick(long millisUntilFinished) {
-                String v = String.format("%02d", millisUntilFinished / 60000);
-                int va = (int) ((millisUntilFinished % 60000) / 1000);
+                String v = String.format("%02d", millisUntilFinished / totalTime);
+                int va = (int) ((millisUntilFinished % totalTime) / 1000);
                 textTimer.setText("" + v + ":" + String.format("%02d", va));
             }
 
@@ -131,15 +132,23 @@ public class test_your_brain_game_screen extends Activity {
                 final Intent i = new Intent(test_your_brain_game_screen.this, (level <= 4) ? LevelActivity.class : ScoreActivity.class);
 
                 JSONData data = new JSONData("JA", b1.getString("data"));
-                data.set_level_data(Integer.toString(score), Integer.toString(wrong_answer), Integer.toString(correct_answer), "60000", click_detail.get_data_JA());
+                data.set_level_data(Integer.toString(score), Integer.toString(wrong_answer), Integer.toString(correct_answer), Integer.toString(totalTime), click_detail.get_data_JA());
 
                 b1.remove("game_level");
                 b1.remove("data");
 
                 i.putExtras(b1);
 
-                i.putExtra("data", data.get_data_string());
+                i.putExtra("data", data.get_data_string_without_intend());
                 i.putExtra("game_level", Integer.toString(level + 1));
+
+                final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
+                if (level > 4) {
+                    sp.set_game_score(test_your_brain_game_screen.this, data.get_data_JA());
+                    i.removeExtra("data");
+                    i.putExtra("data", sp.get_API() + "\n\n" + sp.get_DATA());
+                    sp.async_response_modified();
+                }
                 final ProgressDialog progressDialog = new ProgressDialog(test_your_brain_game_screen.this,
                         R.style.AppTheme_Dark_Dialog);
                 progressDialog.setIndeterminate(true);
@@ -151,10 +160,13 @@ public class test_your_brain_game_screen extends Activity {
                             public void run() {
 
                                 startActivity(i);
+                                if (level > 4) {
+                                    Toast.makeText(test_your_brain_game_screen.this, sp.get_game_score_after_call(), Toast.LENGTH_SHORT).show();
+                                }
                                 finish();
                                 progressDialog.dismiss();
                             }
-                        }, (level <= 4) ? 1000 : 3000);
+                        }, (level <= 4) ? 1000 : 6000);
 
 
             }
@@ -209,7 +221,7 @@ public class test_your_brain_game_screen extends Activity {
                         playSound(getApplicationContext(), 2);
                 }
                 //set the click_details
-                click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (status) ? "C" : "W");
+                click_detail.set_click_details(Long.toString(System.currentTimeMillis() / 1000), (status) ? "C" : "W");
                 if (status) correct_answer++;
                 else wrong_answer++;
                 dispScore.setText("Score : " + score);
@@ -260,7 +272,7 @@ public class test_your_brain_game_screen extends Activity {
                     if (soundStatus == 1) playSound(getApplicationContext(), 2);
                 }
                 //set the click_details
-                click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (status) ? "C" : "W");
+                click_detail.set_click_details(Long.toString(System.currentTimeMillis() / 1000), (status) ? "C" : "W");
                 if (status) correct_answer++;
                 else wrong_answer++;
                 dispScore.setText("Score : " + score);

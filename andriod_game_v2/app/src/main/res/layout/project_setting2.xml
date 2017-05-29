@@ -173,13 +173,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="Right Handed" />
+                        android:text="Right" />
 
                     <RadioButton
                         android:id="@+id/left_hand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Left Handed" />
+                        android:text="Left" />
                 </RadioGroup>
 
             </LinearLayout>

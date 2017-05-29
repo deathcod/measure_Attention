@@ -23,6 +23,7 @@ import info.androidhive.navigationdrawer.activity.LevelActivity;
 import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.JSONData;
+import info.androidhive.navigationdrawer.other.SharedPreference;
 
 public class chess_game_screen extends Activity {
 
@@ -164,6 +165,12 @@ public class chess_game_screen extends Activity {
         i.putExtras(b1);
         i.putExtra("data", data.get_data_string());
         i.putExtra("game_level", Integer.toString(l + 1));
+
+        final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
+        if (l > 3) {
+            sp.set_game_score(chess_game_screen.this, data.get_data_JA());
+            sp.async_response_modified();
+        }
         final ProgressDialog progressDialog = new ProgressDialog(chess_game_screen.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -175,10 +182,16 @@ public class chess_game_screen extends Activity {
                     public void run() {
 
                         startActivity(i);
+                        if (l > 3) {
+                            if (sp.fetchData.flag == 0)
+                                Toast.makeText(chess_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(chess_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
+                        }
                         finish();
                         progressDialog.dismiss();
                     }
-                }, (l <= 3) ? 1000 : 3000);
+                }, (l <= 3) ? 1000 : 6000);
 
 
     }
@@ -203,7 +216,7 @@ public class chess_game_screen extends Activity {
                         Toast.makeText(chess_game_screen.this, "Wrong!", Toast.LENGTH_SHORT).show();
 
                     //set the click_details
-                    click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (flag == 0) ? "W" : "C");
+                    click_detail.set_click_details(Long.toString(System.currentTimeMillis() / 1000), (flag == 0) ? "W" : "C");
 
                     if (clickCount++ == 5)
                         onFinish();

@@ -12,12 +12,14 @@ import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.LevelActivity;
 import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.JSONData;
+import info.androidhive.navigationdrawer.other.SharedPreference;
 
 public class card_game_game_screen extends Activity {
     TextView level, timer, tScore;
@@ -159,7 +161,7 @@ public class card_game_game_screen extends Activity {
                         }
                     }
                     //set the click_details
-                    click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (flag == 0) ? "W" : "C");
+                    click_detail.set_click_details(Long.toString(System.currentTimeMillis() / 1000), (flag == 0) ? "W" : "C");
 
                     tScore.setText(score + "");
                     stopCond++;
@@ -180,6 +182,11 @@ public class card_game_game_screen extends Activity {
                         i.putExtra("game_score_L" + Integer.toString(l), score);
                         i.putExtra("game_level", Integer.toString(l + 1));
 
+                        final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
+                        if (l > 3) {
+                            sp.set_game_score(card_game_game_screen.this, data.get_data_JA());
+                            sp.async_response_modified();
+                        }
                         final ProgressDialog progressDialog = new ProgressDialog(card_game_game_screen.this,
                                 R.style.AppTheme_Dark_Dialog);
                         progressDialog.setIndeterminate(true);
@@ -191,17 +198,22 @@ public class card_game_game_screen extends Activity {
                                     public void run() {
 
                                         startActivity(i);
+                                        if (l > 3) {
+                                            if (sp.fetchData.flag == 0)
+                                                Toast.makeText(card_game_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
+                                            else
+                                                Toast.makeText(card_game_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
+                                        }
                                         finish();
                                         progressDialog.dismiss();
                                     }
-                                }, (l <= 3) ? 1000 : 3000);
+                                }, (l <= 3) ? 1000 : 6000);
 
 
                         //String remark = new SharedPreference("card").set_card_game_score(card_game_Game.this, Integer.toString(score), Long.toString(SystemClock.elapsedRealtime()-startTime), Integer.toString(l));
                         //if (remark != null)                            Toast.makeText(card_game_Game.this, remark, Toast.LENGTH_SHORT).show();
                         stopWatch.setText(String.format("%s:%s", String.format("%02d", 0), String.format("%02d", 0)));
                     }
-
                 }
             });
         }

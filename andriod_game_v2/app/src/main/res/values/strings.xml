@@ -16,11 +16,14 @@
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
+
+        <!-- add your game name here-->
         <item>Stroop</item>
         <item>Chess</item>
         <item>Card Game</item>
         <item>Test your Brain</item>
-        <item>Settings</item>
+
+        <item>Settings</item><!-- Keep settings in the last always-->
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>

@@ -42,10 +42,10 @@ public class JSONData {
         JSONObject temp_level = new JSONObject();
         try {
             temp_level.put("score", score);
-            temp_level.put("wrong_answer", wrong_answer);
-            temp_level.put("correct_answer", correct_answer);
+            temp_level.put("wrong", wrong_answer);
+            temp_level.put("correct", correct_answer);
             temp_level.put("time", time);
-            temp_level.put("click_details", click_details);
+            temp_level.put("click", click_details);
 
             //storing the level data in the array
             this.JA.put(temp_level);
@@ -83,8 +83,8 @@ public class JSONData {
     public void set_click_details(String time_of_click, String status_of_click) {
         JSONObject temp_click_details = new JSONObject();
         try {
-            temp_click_details.put("time_of_click", time_of_click);
-            temp_click_details.put("status_of_click", status_of_click);
+            temp_click_details.put("datetime", time_of_click);
+            temp_click_details.put("status", status_of_click);
 
             //storing the click_details
             this.JA.put(temp_click_details);
@@ -111,6 +111,15 @@ public class JSONData {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return s;
+    }
+
+    public String get_data_string_without_intend() {
+        String s = "[]";
+        if (select.equals("JA"))
+            s = this.JA.toString();
+        else
+            s = this.JO.toString();
         return s;
     }
 }

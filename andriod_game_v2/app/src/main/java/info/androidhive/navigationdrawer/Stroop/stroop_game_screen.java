@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.JSONData;
+import info.androidhive.navigationdrawer.other.SharedPreference;
 
 /**
  * Created by chinmay on 27-Jan-17.
@@ -109,6 +111,11 @@ public class stroop_game_screen extends Activity {
             i.putExtras(b1);
             i.putExtra("data", data.get_data_string());
 
+
+            final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
+            sp.set_game_score(stroop_game_screen.this, data.get_data_JA());
+            sp.async_response_modified();
+
             final ProgressDialog progressDialog = new ProgressDialog(stroop_game_screen.this,
                     R.style.AppTheme_Dark_Dialog);
             progressDialog.setIndeterminate(true);
@@ -118,12 +125,16 @@ public class stroop_game_screen extends Activity {
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
-
                             startActivity(i);
+                            if (sp.fetchData.flag == 0)
+                                Toast.makeText(stroop_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(stroop_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(stroop_game_screen.this, remark, Toast.LENGTH_LONG).show();
                             finish();
                             progressDialog.dismiss();
                         }
-                    }, 3000);
+                    }, 6000);
 
         }
 
@@ -158,10 +169,10 @@ public class stroop_game_screen extends Activity {
                         flag = 1;
                     } else
                         wrong++;
-                    change();
-
                     //set the click_details
-                    click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (flag == 0) ? "W" : "C");
+                    click_detail.set_click_details(Long.toString(System.currentTimeMillis() / 1000), (flag == 0) ? "W" : "C");
+
+                    change();
                 }
             });
         }

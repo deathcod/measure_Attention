@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.LevelActivity;
-import info.androidhive.navigationdrawer.other.GIFView;
 import info.androidhive.navigationdrawer.other.JSONData;
 
 /**
@@ -74,8 +73,6 @@ public class FocusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         LinearLayout mL = (LinearLayout) inflater.inflate(R.layout.focus_fragment, container, false);
-        GIFView gifView = (GIFView) mL.findViewById(R.id.focus_gif);
-        gifView.setGIFResource(R.drawable.focus1);
         return mL;
     }
 
