@@ -103,7 +103,7 @@ public class stroop_game_screen extends Activity {
             long difftime = then - now;
             final Intent i = new Intent(stroop_game_screen.this, ScoreActivity.class);
 
-            JSONData data = new JSONData("JA", b1.getString("data"));
+            final JSONData data = new JSONData("JA", b1.getString("data"));
             data.set_level_data(Integer.toString(correct), Integer.toString(wrong), Integer.toString(correct), Long.toString(difftime), click_detail.get_data_JA());
 
             b1.remove("data");
@@ -113,7 +113,7 @@ public class stroop_game_screen extends Activity {
 
             final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
             sp.set_game_score(stroop_game_screen.this, data.get_data_JA());
-            sp.async_response_modified(stroop_game_screen.this);
+            sp.async_response_modified(stroop_game_screen.this, 10000);
 
             final ProgressDialog progressDialog = new ProgressDialog(stroop_game_screen.this,
                     R.style.AppTheme_Dark_Dialog);
@@ -124,16 +124,14 @@ public class stroop_game_screen extends Activity {
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
+
+                            if (!sp.is_connected())
+                                sp.put_local_data(stroop_game_screen.this, data.get_data_JA());
                             startActivity(i);
-//                            if (sp.fetchData.flag == 0)
-//                                Toast.makeText(stroop_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
-//                            else
-//                                Toast.makeText(stroop_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(stroop_game_screen.this, remark, Toast.LENGTH_LONG).show();
                             finish();
                             progressDialog.dismiss();
                         }
-                    }, 5000);
+                    }, 10000);
 
         }
 

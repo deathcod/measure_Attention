@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import info.androidhive.navigationdrawer.R;
-import info.androidhive.navigationdrawer.activity.ScoreActivity;
+import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.other.GIFView;
 import info.androidhive.navigationdrawer.other.JSONData;
 import info.androidhive.navigationdrawer.other.SharedPreference;
@@ -215,11 +215,11 @@ public class MainFragment extends Fragment {
                 Button radioButtonHand = (RadioButton) mL.findViewById(selectedId);
                 x.set_extra_data("hand", radioButtonHand.getText().toString().toLowerCase());
 
-                final Intent i = new Intent(getActivity(), ScoreActivity.class);
-                i.putExtra("data", x.get_data_string());
+                final Intent i = new Intent(getActivity(), MainActivity.class);
+                //i.putExtra("data", x.get_data_string());
 
                 sp.set_settings(x.get_data_string_without_intend());
-                sp.async_response_modified(getActivity());
+                sp.async_response_modified(getActivity(), 10000);
 
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                         R.style.AppTheme_Dark_Dialog);
@@ -233,11 +233,11 @@ public class MainFragment extends Fragment {
                                 startActivity(i);
 
                                 //checking if the data has responded or not
-                                if (sp.fetchData.flag == 0)
+                                if (sp.is_connected())
                                     sp.set_settings_after_call(getActivity());
                                 progressDialog.dismiss();
                             }
-                        }, 5000);
+                        }, 10000);
 
             }
         });

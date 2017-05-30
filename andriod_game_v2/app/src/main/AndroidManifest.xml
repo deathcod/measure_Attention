@@ -27,8 +27,8 @@
             android:name=".activity.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
-            android:name=".activity.PrivacyPolicyActivity"
-            android:label="@string/activity_title_privacy_policy" />
+            android:name=".activity.LoadDataActivity"
+            android:label="@string/activity_title_load_data" />
 
         <!-- Activity -->
         <activity

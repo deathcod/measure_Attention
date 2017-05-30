@@ -27,11 +27,11 @@
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
-    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="activity_title_load_data">Load Data</string>
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="Load_Data">Load Data</string>
 
     <!-- Game short description -->
     <string name="detail_stroop">Based on the standard STROOP task, in this game a person has to identify the colour of the text.</string>
@@ -62,9 +62,13 @@
     <string name="test_your_brain_ins_L4">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in “right to left order” tap on the green tick button.\n Otherwise tap on the red cross button.</string>
     <string name="test_your_brain_ins_L5">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in the order indicated by the violet arrow that appears showing left or right randomly on the screen each turn, tap on the green tick button to score.\n Otherwise tap on the red cross button.</string>
 
+    <!-- local data instruction-->
+    <string name="local_data_ins">You can upload your local data here \nif somehow data wont get to the server.</string>
+
     <!-- dialogs -->
     <string name="cs">Connecting server...</string>
     <string name="l">Loading...</string>
     <string name="sd">Saving data..</string>
+    <string name="cd">Clearing data..</string>
 
 </resources>

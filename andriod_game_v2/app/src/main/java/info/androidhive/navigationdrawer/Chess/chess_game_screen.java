@@ -158,7 +158,7 @@ public class chess_game_screen extends Activity {
         final Intent i = new Intent(chess_game_screen.this, (l <= 3) ? LevelActivity.class : ScoreActivity.class);
         b1.remove("game_level");
 
-        JSONData data = new JSONData("JA", b1.getString("data"));
+        final JSONData data = new JSONData("JA", b1.getString("data"));
         data.set_level_data(Integer.toString(score), Integer.toString(6 - score), Integer.toString(score), Long.toString(beforePause), click_detail.get_data_JA());
 
         b1.remove("data");
@@ -169,7 +169,7 @@ public class chess_game_screen extends Activity {
         final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
         if (l > 3) {
             sp.set_game_score(chess_game_screen.this, data.get_data_JA());
-            sp.async_response_modified(chess_game_screen.this);
+            sp.async_response_modified(chess_game_screen.this, 10000);
         }
         final ProgressDialog progressDialog = new ProgressDialog(chess_game_screen.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -182,16 +182,13 @@ public class chess_game_screen extends Activity {
                     public void run() {
 
                         startActivity(i);
-//                        if (l > 3) {
-//                            if (sp.fetchData.flag == 0)
-//                                Toast.makeText(chess_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
-//                            else
-//                                Toast.makeText(chess_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
-//                        }
+                        if (l > 3 && !sp.is_connected()) {
+                            sp.put_local_data(chess_game_screen.this, data.get_data_JA());
+                        }
                         finish();
                         progressDialog.dismiss();
                     }
-                }, (l <= 3) ? 1000 : 5000);
+                }, (l <= 3) ? 1000 : 10000);
 
 
     }

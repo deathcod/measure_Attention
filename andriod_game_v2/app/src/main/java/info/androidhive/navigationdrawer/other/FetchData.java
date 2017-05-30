@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -25,13 +26,15 @@ import java.nio.charset.StandardCharsets;
 public class FetchData extends AsyncTask<Void, Void, String> {
 
     public int flag;
-    private String API, JSON, DATA;
+    private String API, JSON, DATA, GAME_NAME;
     private Context context;
+    private int timeout;
 
-    public FetchData(Context context, String API, String DATA) {
+    public FetchData(Context context, String API, String DATA, int timeout) {
         this.API = API;
         this.DATA = DATA;
         this.context = context;
+        this.timeout = timeout;
         JSON = "{}";
         flag = 0;
     }
@@ -42,6 +45,7 @@ public class FetchData extends AsyncTask<Void, Void, String> {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         Log.d(":", API);
+        //CreateToken(this.context, "I am here");
         // Will contain the raw JSON response as a string.
         String forecastJsonStr = null;
 
@@ -49,7 +53,7 @@ public class FetchData extends AsyncTask<Void, Void, String> {
             byte[] postData = DATA.getBytes(StandardCharsets.UTF_8);
             int postLength = postData.length;
 
-            URL url = new URL(API);
+            URL url = new URL(this.API);
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
@@ -58,8 +62,8 @@ public class FetchData extends AsyncTask<Void, Void, String> {
             urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postLength));
             urlConnection.setUseCaches(false);
-            urlConnection.setConnectTimeout(20000);
-            urlConnection.setReadTimeout(20000);
+            urlConnection.setConnectTimeout(this.timeout);
+            urlConnection.setReadTimeout(this.timeout);
 
             try (DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream())) {
                 wr.write(postData);
@@ -83,17 +87,11 @@ public class FetchData extends AsyncTask<Void, Void, String> {
             }
 
             if (buffer.length() == 0) {
-                //if failure show timeout
-                CreateToken(context, "TimeOut");
                 return null;
             }
             forecastJsonStr = buffer.toString();
             this.JSON = forecastJsonStr;
             this.flag = 1;
-
-            //if successful show the remark
-            JSONObject j = new JSONObject(this.JSON);
-            CreateToken(context, j.getString("remark"));
 
             return forecastJsonStr;
         } catch (java.net.SocketTimeoutException e) {
@@ -113,6 +111,21 @@ public class FetchData extends AsyncTask<Void, Void, String> {
                 }
             }
         }
+    }
+
+    @Override
+    public void onPostExecute(String result) {
+        String ret = Integer.toString(flag);
+        //String ret = "Time Out!!";
+        if (flag == 1) {
+            try {
+                JSONObject j = new JSONObject(this.get_JSON());
+                ret = j.getString("remark");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        CreateToken(context, ret);
     }
 
     public String get_JSON() {

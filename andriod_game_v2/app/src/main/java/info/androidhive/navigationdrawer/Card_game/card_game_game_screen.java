@@ -171,7 +171,7 @@ public class card_game_game_screen extends Activity {
 
                         final Intent i = new Intent(card_game_game_screen.this, (l <= 3) ? LevelActivity.class : ScoreActivity.class);
 
-                        JSONData data = new JSONData("JA", b1.getString("data"));
+                        final JSONData data = new JSONData("JA", b1.getString("data"));
                         data.set_level_data(Integer.toString(score), Integer.toString(5 - score), Integer.toString(score), Long.toString(SystemClock.elapsedRealtime() - startTime), click_detail.get_data_JA());
 
                         b1.remove("game_level");
@@ -184,7 +184,7 @@ public class card_game_game_screen extends Activity {
                         final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
                         if (l > 3) {
                             sp.set_game_score(card_game_game_screen.this, data.get_data_JA());
-                            sp.async_response_modified(card_game_game_screen.this);
+                            sp.async_response_modified(card_game_game_screen.this, 10000);
                         }
                         final ProgressDialog progressDialog = new ProgressDialog(card_game_game_screen.this,
                                 R.style.AppTheme_Dark_Dialog);
@@ -197,16 +197,13 @@ public class card_game_game_screen extends Activity {
                                     public void run() {
 
                                         startActivity(i);
-//                                        if (l > 3) {
-//                                            if (sp.fetchData.flag == 0)
-//                                                Toast.makeText(card_game_game_screen.this, "network_error", Toast.LENGTH_SHORT).show();
-//                                            else
-//                                                Toast.makeText(card_game_game_screen.this, "successfully uploaded", Toast.LENGTH_SHORT).show();
-//                                        }
+                                        if (l > 3 && !sp.is_connected()) {
+                                            sp.put_local_data(card_game_game_screen.this, data.get_data_JA());
+                                        }
                                         finish();
                                         progressDialog.dismiss();
                                     }
-                                }, (l <= 3) ? 1000 : 5000);
+                                }, (l <= 3) ? 1000 : 10000);
 
 
                         //String remark = new SharedPreference("card").set_card_game_score(card_game_Game.this, Integer.toString(score), Long.toString(SystemClock.elapsedRealtime()-startTime), Integer.toString(l));

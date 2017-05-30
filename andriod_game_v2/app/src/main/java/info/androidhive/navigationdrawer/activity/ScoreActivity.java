@@ -3,8 +3,13 @@ package info.androidhive.navigationdrawer.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import info.androidhive.navigationdrawer.R;
 
@@ -19,13 +24,41 @@ public class ScoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        LinearLayout mL = (LinearLayout) findViewById(R.id.activity_LL_score);
         Bundle b1 = getIntent().getExtras();
-        String s = Integer.toString(b1.getString("data").length());
-        s += "\n\n" + b1.getString("data");
+        String s = b1.getString("data");
 
-        TextView t1 = (TextView) findViewById(R.id.score);
-        t1.setMovementMethod(new ScrollingMovementMethod());
-        t1.setText(s);
+
+        try {
+            JSONArray JA = new JSONArray(s);
+            for (int i = 0; i < JA.length(); i++) {
+                JSONObject JO = JA.optJSONObject(i);
+
+                //LinearLayout child_mL = (LinearLayout) findViewById(R.id.score_xml);
+                View child_mL = getLayoutInflater().inflate(R.layout.score, null);
+
+                TextView score = (TextView) child_mL.findViewById(R.id.activity_score);
+                score.setText(JO.getString("score"));
+
+                TextView level = (TextView) child_mL.findViewById(R.id.activity_level);
+                level.setText(Integer.toString(i + 1));
+
+                TextView time = (TextView) child_mL.findViewById(R.id.activity_time);
+                time.setText(JO.getString("time") + " ms");
+
+                TextView correct = (TextView) child_mL.findViewById(R.id.activity_correct);
+                correct.setText(JO.getString("correct"));
+
+                TextView wrong = (TextView) child_mL.findViewById(R.id.activity_wrong);
+                wrong.setText(JO.getString("wrong"));
+
+
+                mL.addView(child_mL);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

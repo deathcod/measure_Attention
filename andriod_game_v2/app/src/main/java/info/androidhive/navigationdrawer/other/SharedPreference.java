@@ -3,6 +3,8 @@ package info.androidhive.navigationdrawer.other;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ import info.androidhive.navigationdrawer.R;
  */
 
 public class SharedPreference extends Activity {
-    public FetchData fetchData;
+    private FetchData fetchData;
     private String IP;
     private String HOSTNAME;
     private String DIR;
@@ -38,8 +40,8 @@ public class SharedPreference extends Activity {
         HOSTNAME = "http://";
     }
 
-    public void async_response_modified(Context context) {
-        fetchData = new FetchData(context, API, DATA);
+    public void async_response_modified(Context context, int timeout) {
+        fetchData = new FetchData(context, API, DATA, timeout);
         fetchData.execute();
     }
 
@@ -137,9 +139,14 @@ public class SharedPreference extends Activity {
                 reply.remove("datetime");
                 reply.put("ip", IP);
                 putString(context, reply.toString());
+
                 // This is to get the token or userid if stored
                 String ss = getString(context, "{\"list\" : [\"user_id\" , \"token\" , \"ip\"]}");
                 JSONObject j_stored = new JSONObject(ss);
+
+                //This is to set a flag which will be used by the local_data update
+                j_stored.put("flag", "0");
+                j_stored.put("SP_array", new JSONArray().toString());
 
                 for (int i = 0; i < game_names.length; i++) {
                     GAME_NAME = game_names[i];
@@ -148,7 +155,7 @@ public class SharedPreference extends Activity {
                     if (!j_stored.getString("token").equals(reply.getString("token")))
                         clear_shared_preferences(context);
 
-                    putString(context, ss);
+                    putString(context, j_stored.toString());
                 }
 
                 ret = "updated";
@@ -238,5 +245,77 @@ public class SharedPreference extends Activity {
 
     public String get_DATA() {
         return DATA;
+    }
+
+    public boolean is_connected() {
+        return fetchData.flag == 1;
+    }
+
+    //This function will send the local_data of a specific game asynchronpusly
+    public void upload_local_data(final Context context) {
+        try {
+            final JSONArray SP_array = new JSONArray(get_one_String(context, "SP_array"));
+
+            if (get_one_String(context, "flag").equals("0") && SP_array.length() != 0) {
+                putString(context, new JSONObject().put("flag", "1").toString());
+                set_game_score(context, SP_array.optJSONArray(0));
+                async_response_modified(context, 20000);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                            @Override
+                            public void run() {
+                                try {
+                                    JSONObject j = new JSONObject();
+                                    if (fetchData.flag == 1) {
+                                        SP_array.remove(0);
+
+                                        j.put("SP_array", SP_array.toString());
+                                        putString(context, j.toString());
+                                    }
+                                    j.put("flag", "0");
+                                    putString(context, j.toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, 20000
+                );
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void put_local_data(Context context, JSONArray json_score) {
+        try {
+            JSONArray SP_array = new JSONArray(get_one_String(context, "SP_array"));
+            SP_array.put(json_score);
+
+            putString(context, new JSONObject().put("SP_array", SP_array).toString());
+            //Toast.makeText(context, SP_array.toString(), Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int get_local_data_length(Context context) {
+        int length = 0;
+        try {
+            JSONArray SP_array = new JSONArray(get_one_String(context, "SP_array"));
+            length = SP_array.length();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return length;
+    }
+
+    public void clear_load_data(Context context) {
+        try {
+            putString(context, new JSONObject().put("SP_array", new JSONArray().toString()).toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
