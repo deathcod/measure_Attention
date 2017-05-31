@@ -27,8 +27,8 @@
             android:name=".activity.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
-            android:name=".activity.LoadDataActivity"
-            android:label="@string/activity_title_load_data" />
+            android:name=".activity.LocalDataActivity"
+            android:label="@string/activity_title_local_data" />
 
         <!-- Activity -->
         <activity

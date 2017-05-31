@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_load_data:
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, LoadDataActivity.class));
+                        startActivity(new Intent(MainActivity.this, LocalDataActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:

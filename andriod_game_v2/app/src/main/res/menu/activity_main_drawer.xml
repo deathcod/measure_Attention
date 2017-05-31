@@ -34,7 +34,7 @@
                 android:title="@string/nav_about_us" />
             <item
                 android:id="@+id/nav_load_data"
-                android:title="@string/Load_Data" />
+                android:title="@string/Local_Data" />
         </menu>
     </item>
 
