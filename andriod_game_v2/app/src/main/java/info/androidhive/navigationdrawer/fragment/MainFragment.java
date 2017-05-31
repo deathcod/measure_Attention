@@ -81,7 +81,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         switch (mParam1) {
             case "settings":
-                return settings((LinearLayout) inflater.inflate(R.layout.project_setting2, container, false));
+                return settings((LinearLayout) inflater.inflate(R.layout.project_setting, container, false));
 
 
             default:

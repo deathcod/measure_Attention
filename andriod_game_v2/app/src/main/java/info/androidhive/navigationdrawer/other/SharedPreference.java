@@ -1,6 +1,5 @@
 package info.androidhive.navigationdrawer.other;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -21,11 +20,13 @@ import java.util.Random;
 
 import info.androidhive.navigationdrawer.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by chinmay on 14-Apr-17.
  */
 
-public class SharedPreference extends Activity {
+public class SharedPreference {
     private FetchData fetchData;
     private String IP;
     private String HOSTNAME;

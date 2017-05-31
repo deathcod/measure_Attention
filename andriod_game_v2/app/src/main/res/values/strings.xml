@@ -27,11 +27,11 @@
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
-    <string name="activity_title_load_data">Load Data</string>
+    <string name="activity_title_local_data">Local Data</string>
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="Load_Data">Load Data</string>
+    <string name="Local_Data">Local Data</string>
 
     <!-- Game short description -->
     <string name="detail_stroop">Based on the standard STROOP task, in this game a person has to identify the colour of the text.</string>
@@ -64,6 +64,7 @@
 
     <!-- local data instruction-->
     <string name="local_data_ins">You can upload your local data here \nif somehow data wont get to the server.</string>
+    <string name="local_data_footer_ins"><b>NOTE:</b>  If check buttons are unclickable though there is local data, its because the data is getting uploaded in the background try to load the local data again</string>
 
     <!-- dialogs -->
     <string name="cs">Connecting server...</string>

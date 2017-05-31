@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,6 +133,8 @@ public class FetchData extends AsyncTask<Void, Void, String> {
 
     //Show the token of response
     private void CreateToken(Context context, String remark) {
-        Toast.makeText(context, remark, Toast.LENGTH_SHORT).show();
+
+        //uncomment for testing using Toast.
+        //Toast.makeText(context, remark, Toast.LENGTH_SHORT).show();
     }
 }
