@@ -235,9 +235,11 @@ private void setUpNavigationView() {
 So here the current tag is changed to the index it is clicked, in the drawable menu.
 This will trigger the loadfragment to load this particular fragment.
 
-* first create a new package with fist letter capital (Demo_game)
+* First create a new package with fist letter capital (Demo_game)
 * Now create a java class inside the package (demo_game_game_screen)
-* add the functionality to the game assume that from the gradle you are getting the following data.
+* Add a new folder outside java (Demo_game) which includes the res.
+* Now go to build.gradle inside the app. and add the folder of Demo_game/res in res.srcDirs.
+* Add the functionality to the game assume that from the gradle you are getting the following data.
     - game_level
     - data : JSONArray of data containing the details from each level
     - game_level : the current level of the game
