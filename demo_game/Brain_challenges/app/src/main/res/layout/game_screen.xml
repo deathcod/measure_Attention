@@ -60,7 +60,6 @@
                     android:id="@+id/brain_check_expression"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checkedButton="@+id/brain_correct"
                     android:orientation="vertical">
 
                     <RadioButton

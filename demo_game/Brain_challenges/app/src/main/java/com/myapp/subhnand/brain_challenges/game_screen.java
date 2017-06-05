@@ -1,22 +1,18 @@
 package com.myapp.subhnand.brain_challenges;
 
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Handler;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
-
-import java.util.Calendar;
-import java.util.Random;
-import java.util.TimeZone;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
+import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.Random;
 
 public class game_screen extends Activity
 {
@@ -28,7 +24,8 @@ public class game_screen extends Activity
     ImageView image;
     GifImageView gif;
     TextView text;
-
+    Pair<String, Boolean> exp;
+    RadioGroup check_expression;
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
@@ -43,6 +40,7 @@ public class game_screen extends Activity
         image = (ImageView) findViewById(R.id.brain_image);  //image to be displayed
         gif   = (GifImageView) findViewById(R.id.brain_gif);
         text  = (TextView) findViewById(R.id.brain_text);
+        check_expression = (RadioGroup) findViewById(R.id.brain_check_expression);
     }
 
     @Override
@@ -73,9 +71,9 @@ public class game_screen extends Activity
         {
             findViewById(R.id.brain_l_text).setVisibility(View.VISIBLE);
             TextView brain_text = (TextView)findViewById(R.id.brain_text);
-            Pair<String, Boolean> exp= expression_builder();
-
+            exp = expression_builder();
             brain_text.setText(exp.first);
+            addListenerOnButton();
         }
         handler.postDelayed(new Runnable() {
             @Override
@@ -89,6 +87,22 @@ public class game_screen extends Activity
                 */
             }
         },time_to_diaplay);
+    }
+
+    public void addListenerOnButton() {
+        check_expression.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                RadioButton check_result = (RadioButton) findViewById(checkedId);
+                if ((check_result.getText().equals("CORRECT") && exp.second == true) || (check_result.getText().equals("WRONG") && exp.second == false)) {
+                    check_result.setBackgroundColor(getResources().getColor(R.color.green));
+                } else {
+                    check_result.setBackgroundColor(getResources().getColor(R.color.red));
+                }
+                findViewById(R.id.brain_correct).setEnabled(false);
+                findViewById(R.id.brain_wrong).setEnabled(false);
+            }
+        });
     }
 
     private static int getStringIdentifier(Context context, String resource, String name) {
@@ -137,7 +151,7 @@ public class game_screen extends Activity
         int operator2 = rnd.nextInt(3);
         int comparator = rnd.nextInt(6) + 3;
 
-        Boolean answer = (calculate(calculate(operand[0],operand[1],symbol[operator1]),calculate(operand[2],operand[3],symbol[operator2]),symbol[comparator]) == 1)?true : false;
+        Boolean answer = (calculate(calculate(operand[0], operand[1], symbol[operator1]), calculate(operand[2], operand[3], symbol[operator2]), symbol[comparator]) == 1);
         String expression = Integer.toString(operand[0]) + symbol[operator1] + Integer.toString(operand[1]) + symbol[comparator] + Integer.toString(operand[2]) + symbol[operator2] + Integer.toString(operand[3]);
         Pair<String, Boolean> x =new Pair(expression, answer);
         return x;
