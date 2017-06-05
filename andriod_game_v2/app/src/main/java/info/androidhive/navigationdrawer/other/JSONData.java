@@ -114,6 +114,7 @@ public class JSONData {
         return s;
     }
 
+    //TODO please change the name from intend to intent
     public String get_data_string_without_intend() {
         String s = "[]";
         if (select.equals("JA"))

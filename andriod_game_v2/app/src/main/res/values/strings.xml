@@ -64,7 +64,7 @@
 
     <!-- local data instruction-->
     <string name="local_data_ins">You can upload your local data here \nif somehow data wont get to the server.</string>
-    <string name="local_data_footer_ins"><b>NOTE:</b>  If check buttons are unclickable though there is local data, its because the data is getting uploaded in the background try to load the local data again</string>
+    <string name="local_data_footer_ins"><b>NOTE:</b>\nIf check buttons are unclickable though there is local data, its because the data is getting uploaded in the background try to load the local data again</string>
 
     <!-- dialogs -->
     <string name="cs">Connecting server...</string>

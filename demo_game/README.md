@@ -1,0 +1,1 @@
+This is where a new game is developed according to the norms of the framework I created and finally incorporate the changes in the game and fit in the framework.

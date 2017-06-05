@@ -53,8 +53,8 @@ public class LevelActivity extends Activity {
         mL.setBackgroundResource(getStringIdentifier(LevelActivity.this, "drawable", s));
 
         //LEVEL button set
-        final Button button = (Button) findViewById(R.id.game_play);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button game_play = (Button) findViewById(R.id.game_play);
+        game_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -86,7 +86,7 @@ public class LevelActivity extends Activity {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                button.setClickable(false);
+                game_play.setClickable(false);
             }
         });
     }
