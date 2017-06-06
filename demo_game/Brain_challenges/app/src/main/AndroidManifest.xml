@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".level">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +26,6 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
         <activity
             android:name=".result_screen"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
-        <activity
-            android:name=".level"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
     </application>
