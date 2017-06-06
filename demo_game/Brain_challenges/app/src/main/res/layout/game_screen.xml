@@ -18,9 +18,9 @@
                 android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/brain_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/brain_image"
                     android:layout_gravity="center"
                     android:gravity="center" />
             </LinearLayout>
@@ -32,9 +32,9 @@
                 android:visibility="gone">
 
                 <com.myapp.subhnand.brain_challenges.GifImageView
+                    android:id="@+id/brain_gif"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/brain_gif"
                     android:layout_gravity="center"
                     android:gravity="center" />
             </LinearLayout>
@@ -52,9 +52,9 @@
                     android:text="IS THE EXPRESSION CORRECT OR WRONG"/>
 
                 <TextView
+                    android:id="@+id/brain_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/brain_text"/>
+                    android:layout_height="wrap_content" />
 
                 <RadioGroup
                     android:id="@+id/brain_check_expression"
@@ -64,15 +64,15 @@
 
                     <RadioButton
                         android:id="@+id/brain_correct"
-                        android:text="CORRECT"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="CORRECT" />
 
                     <RadioButton
                         android:id="@+id/brain_wrong"
-                        android:text="WRONG"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="WRONG" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -81,9 +81,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ASK QUESTION" />
+
+            <Button
+                android:id="@+id/brain_button_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/brain_button_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/brain_button_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/brain_button_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="0" />
         </LinearLayout>
-
-
 </LinearLayout>
