@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.IdRes;
 import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ import java.util.Random;
 
 public class game_screen extends Activity
 {
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 3;
     final Random rnd = new Random();
     int level,time_to_diaplay;
     String str, game_name;
@@ -30,7 +27,6 @@ public class game_screen extends Activity
     GifImageView gif;
     TextView text;
     Pair<String, Boolean> exp;
-    RadioGroup check_expression;
     int button_id[] = {
             R.id.brain_button_1,
             R.id.brain_button_2,
@@ -64,14 +60,13 @@ public class game_screen extends Activity
         Bundle b1 = getIntent().getExtras();
         level= b1.getInt("level");    //receives the level number intended from level.java
         game_name = b1.getString("game_name");
-        time_to_diaplay=rnd.nextInt(7000)+SPLASH_TIME_OUT;
+        time_to_diaplay = rnd.nextInt(7) + SPLASH_TIME_OUT;
         handler = new Handler();
         setContentView(R.layout.game_screen);
 
         image = (ImageView) findViewById(R.id.brain_image);  //image to be displayed
         gif   = (GifImageView) findViewById(R.id.brain_gif);
         text  = (TextView) findViewById(R.id.brain_text);
-        check_expression = (RadioGroup) findViewById(R.id.brain_check_expression);
         for (int i = 0; i < 4; i++)
             buttons[i] = (Button) findViewById(button_id[i]);
     }
@@ -88,23 +83,9 @@ public class game_screen extends Activity
         finish();
     }
 
-    public void addListenerOnButton() {
-        check_expression.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                RadioButton check_result = (RadioButton) findViewById(checkedId);
-                if ((check_result.getText().equals("CORRECT") && exp.second == true) || (check_result.getText().equals("WRONG") && exp.second == false)) {
-                    check_result.setBackgroundColor(getResources().getColor(R.color.green));
-                } else {
-                    check_result.setBackgroundColor(getResources().getColor(R.color.red));
-                }
-                findViewById(R.id.brain_correct).setEnabled(false);
-                findViewById(R.id.brain_wrong).setEnabled(false);
-            }
-        });
-    }
-
     private void rounds() {
+
+        // initialization in the questioning side
         for (int i = 0; i < 4; i++) {
             buttons[i].setText("");
             buttons[i].setClickable(false);
@@ -132,10 +113,7 @@ public class game_screen extends Activity
         {
             current_view = (LinearLayout) findViewById(R.id.brain_l_text);
             current_view.setVisibility(View.VISIBLE);
-            TextView brain_text = (TextView)findViewById(R.id.brain_text);
-            exp = expression_builder();
-            brain_text.setText(exp.first);
-            addListenerOnButton();
+            expression_round();
         }
         handler.postDelayed(new Runnable() {
             @Override
@@ -143,7 +121,7 @@ public class game_screen extends Activity
 
                 current_view.setVisibility(View.GONE);
                 int x = (rnd.nextInt(4) + 1) * -1;
-                int time_in_button[] = {time_to_diaplay / 1000 + x + 1, time_to_diaplay / 1000 + x + 2, time_to_diaplay / 1000 + x + 3, time_to_diaplay / 1000 + x + 4};
+                int time_in_button[] = {time_to_diaplay + x + 1, time_to_diaplay + x + 2, time_to_diaplay + x + 3, time_to_diaplay + x + 4};
                 time_in_button = pickNrandom(time_in_button, 4);
 
                 for (int i = 0; i < 4; i++) {
@@ -165,7 +143,45 @@ public class game_screen extends Activity
                 startActivity(s);
                 */
             }
-        },time_to_diaplay);
+        }, time_to_diaplay * 1000);
+    }
+
+    // this is for the fourth and fifth round
+    private void expression_round() {
+        //initialization of expression round
+        TextView brain_text = (TextView) findViewById(R.id.brain_text);
+        final Button brain_exp_correct = (Button) findViewById(R.id.brain_exp_correct);
+        final Button brain_exp_wrong = (Button) findViewById(R.id.brain_exp_wrong);
+
+        //game screen initialization
+        exp = expression_builder();
+        brain_text.setText(exp.first);
+        brain_exp_correct.setClickable(true);
+        brain_exp_wrong.setClickable(true);
+        brain_exp_correct.setBackgroundColor(getResources().getColor(R.color.white));
+        brain_exp_wrong.setBackgroundColor(getResources().getColor(R.color.white));
+
+        //setting up the buttons
+        expression_round_button(brain_exp_correct, brain_exp_wrong, exp.second == true);
+        expression_round_button(brain_exp_wrong, brain_exp_correct, exp.second == false);
+    }
+
+    // To change anything in the button in the expression round do here
+    private void expression_round_button(final Button x, final Button y, final boolean z) {
+        x.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                x.setBackgroundColor(getResources().getColor((z == true) ? R.color.green : R.color.red));
+                x.setClickable(false);
+                y.setClickable(false);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        expression_round();
+                    }
+                }, 1000);
+            }
+        });
     }
 
     private int calculate(int a,int b, String operator)
@@ -188,24 +204,52 @@ public class game_screen extends Activity
                 return (a<=b)?1:0;
             case ">=":
                 return (a>=b)?1:0;
-            case "!=":
-                return (a!=b)?1:0;
             default:
                 return 0;
         }
     }
 
-    //Here the expression for the fourth level is build
+    //Here the expression for the fourth and fifth level is build
     private Pair<String, Boolean> expression_builder()
     {
         String symbol[] = {"+", "-", "*", "<", ">", "=", "<=", ">="};
-        int operand[] = {rnd.nextInt(100)+1, rnd.nextInt(100)+1, rnd.nextInt(100)+1, rnd.nextInt(100)+1};
+        int value = 10;
+        int operand[] = {rnd.nextInt(value) + 1, rnd.nextInt(value) + 1, rnd.nextInt(value) + 1, rnd.nextInt(value) + 1};
         int operator1 = rnd.nextInt(3);
         int operator2 = rnd.nextInt(3);
-        int comparator = rnd.nextInt(6) + 3;
+        int comparator = ((level == 4) ? rnd.nextInt(3) : rnd.nextInt(5)) + 3;
 
-        Boolean answer = (calculate(calculate(operand[0], operand[1], symbol[operator1]), calculate(operand[2], operand[3], symbol[operator2]), symbol[comparator]) == 1);
-        String expression = Integer.toString(operand[0]) + symbol[operator1] + Integer.toString(operand[1]) + symbol[comparator] + Integer.toString(operand[2]) + symbol[operator2] + Integer.toString(operand[3]);
+        Boolean answer = false;
+        String expression = "";
+
+        int exp_pattern = (level == 4) ? 0 : rnd.nextInt(3) + 1;
+
+        switch (exp_pattern) {
+            case 0:
+                // pattern X < Y
+                answer = calculate(operand[0], operand[1], symbol[comparator]) == 1;
+                expression = Integer.toString(operand[0]) + symbol[comparator] + Integer.toString(operand[1]);
+                break;
+
+            case 1:
+                // pattern X + Y < Z
+                answer = calculate(calculate(operand[0], operand[1], symbol[operator1]), operand[2], symbol[comparator]) == 1;
+                expression = Integer.toString(operand[0]) + symbol[operator1] + Integer.toString(operand[1]) + symbol[comparator] + Integer.toString(operand[2]);
+                break;
+
+            case 2:
+                // pattern X < Y + Z
+                answer = calculate(operand[0], calculate(operand[1], operand[2], symbol[operator1]), symbol[comparator]) == 1;
+                expression = Integer.toString(operand[0]) + symbol[comparator] + Integer.toString(operand[1]) + symbol[operator1] + Integer.toString(operand[2]);
+                break;
+
+            case 3:
+                // pattern W + X < Y + Z
+                answer = calculate(calculate(operand[0], operand[1], symbol[operator1]), calculate(operand[2], operand[3], symbol[operator2]), symbol[comparator]) == 1;
+                expression = Integer.toString(operand[0]) + symbol[operator1] + Integer.toString(operand[1]) + symbol[comparator] + Integer.toString(operand[2]) + symbol[operator2] + Integer.toString(operand[3]);
+                break;
+        }
+
         Pair<String, Boolean> x =new Pair(expression, answer);
         return x;
     }

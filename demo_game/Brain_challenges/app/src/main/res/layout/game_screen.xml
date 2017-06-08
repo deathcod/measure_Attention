@@ -56,25 +56,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <RadioGroup
-                    android:id="@+id/brain_check_expression"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/brain_exp_correct"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:text="CORRECT" />
 
-                    <RadioButton
-                        android:id="@+id/brain_correct"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CORRECT" />
-
-                    <RadioButton
-                        android:id="@+id/brain_wrong"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="WRONG" />
-
-                </RadioGroup>
+                <Button
+                    android:id="@+id/brain_exp_wrong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WRONG" />
             </LinearLayout>
         </LinearLayout>
 
