@@ -44,7 +44,7 @@ public class game_screen extends Activity
         return context.getResources().getIdentifier(name, resource, context.getPackageName());
     }
 
-    public static int[] pickNrandom(int[] array, int n) {
+    private static int[] pickNrandom(int[] array, int n) {
         List<Integer> list = new ArrayList<Integer>(array.length);
         for (int i : array)
             list.add(i);
@@ -79,7 +79,32 @@ public class game_screen extends Activity
     @Override
     protected void onStart() {
         super.onStart();
+        rounds();
+    }
 
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
+        finish();
+    }
+
+    public void addListenerOnButton() {
+        check_expression.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                RadioButton check_result = (RadioButton) findViewById(checkedId);
+                if ((check_result.getText().equals("CORRECT") && exp.second == true) || (check_result.getText().equals("WRONG") && exp.second == false)) {
+                    check_result.setBackgroundColor(getResources().getColor(R.color.green));
+                } else {
+                    check_result.setBackgroundColor(getResources().getColor(R.color.red));
+                }
+                findViewById(R.id.brain_correct).setEnabled(false);
+                findViewById(R.id.brain_wrong).setEnabled(false);
+            }
+        });
+    }
+
+    private void rounds() {
         for (int i = 0; i < 4; i++) {
             buttons[i].setText("");
             buttons[i].setClickable(false);
@@ -127,7 +152,7 @@ public class game_screen extends Activity
                     buttons[i].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            onStart();
+                            rounds();
                         }
                     });
                 }
@@ -141,28 +166,6 @@ public class game_screen extends Activity
                 */
             }
         },time_to_diaplay);
-    }
-
-    public void addListenerOnButton() {
-        check_expression.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                RadioButton check_result = (RadioButton) findViewById(checkedId);
-                if ((check_result.getText().equals("CORRECT") && exp.second == true) || (check_result.getText().equals("WRONG") && exp.second == false)) {
-                    check_result.setBackgroundColor(getResources().getColor(R.color.green));
-                } else {
-                    check_result.setBackgroundColor(getResources().getColor(R.color.red));
-                }
-                findViewById(R.id.brain_correct).setEnabled(false);
-                findViewById(R.id.brain_wrong).setEnabled(false);
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        handler.removeCallbacksAndMessages(null);
-        finish();
     }
 
     private int calculate(int a,int b, String operator)
