@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public Button game_enter = null;
+    Handler handler;
+    Runnable runnable;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -71,6 +74,7 @@ public class MainFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            handler = new android.os.Handler();
         }
     }
 
@@ -88,7 +92,7 @@ public class MainFragment extends Fragment {
                 mL = (LinearLayout) inflater.inflate(R.layout.main_fragment, container, false);
                 TextView game_instruction = (TextView) mL.findViewById(R.id.game_name);
                 GIFView gifView = (GIFView) mL.findViewById(R.id.nature_gif);
-                gifView.setGIFResource(R.drawable.nature);
+                gifView.setGifImageResource(R.drawable.nature);
                 game_instruction.setText(getStringIdentifier(getActivity(), "string", "detail_" + mParam1));
                 final Button button = (Button) mL.findViewById(R.id.game_enter);
                 button.setText("ENTER");
@@ -227,17 +231,18 @@ public class MainFragment extends Fragment {
                 progressDialog.setMessage(getString(R.string.cs));
                 progressDialog.show();
 
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                startActivity(i);
+                runnable = new Runnable() {
+                    public void run() {
+                        startActivity(i);
 
-                                //checking if the data has responded or not
-                                if (sp.is_connected())
-                                    sp.set_settings_after_call(getActivity());
-                                progressDialog.dismiss();
-                            }
-                        }, 10000);
+                        //checking if the data has responded or not
+                        if (sp.is_connected())
+                            sp.set_settings_after_call(getActivity());
+                        progressDialog.dismiss();
+                    }
+                };
+                handler.postDelayed(
+                        runnable, 10000);
 
             }
         });
@@ -245,5 +250,10 @@ public class MainFragment extends Fragment {
         //
 
         return mL;
+    }
+    @Override
+    public void onDestroy() {
+        handler.removeCallbacks(runnable);
+        super.onDestroy();
     }
 }

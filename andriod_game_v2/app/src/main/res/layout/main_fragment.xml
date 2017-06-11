@@ -10,7 +10,7 @@
         android:id="@+id/game_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.9"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="TextView" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/nature_gif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.4" />
+         />
 
     <Button
         android:id="@+id/game_enter"

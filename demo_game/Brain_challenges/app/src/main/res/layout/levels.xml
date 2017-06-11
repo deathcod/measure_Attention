@@ -49,13 +49,16 @@
             android:background="@drawable/button"
             android:id="@+id/btnLevel4"
             android:layout_weight="1" />
-
-
-        <!--  <ImageButton
-              android:layout_width="70dp"
-              android:layout_height="70dp"
-              android:id="@+id/exitBtn"
-              />  -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textColor="#000000"
+            android:text="Level 5"
+            android:textSize="25dp"
+            android:textAllCaps="true"
+            android:background="@drawable/button"
+            android:id="@+id/btnLevel5"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

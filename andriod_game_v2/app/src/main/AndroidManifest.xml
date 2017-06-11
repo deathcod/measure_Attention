@@ -65,6 +65,12 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
 
+        <!-- Brain Challenge xml-->
+        <activity
+            android:name=".Brain_challenge.brain_challenge_game_screen"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen"></activity>
     </application>
 
 </manifest>

@@ -16,9 +16,14 @@
             android:title="@string/nav_card_game" />
 
         <item
-            android:id="@+id/nav_tesr_your_brain"
+            android:id="@+id/nav_test_your_brain"
             android:icon="@drawable/brain"
             android:title="@string/nav_test_your_brain" />
+
+        <item
+            android:id="@+id/nav_brain_challenge"
+            android:icon="@drawable/brain"
+            android:title="@string/nav_brain_challenge" />
 
         <item
             android:id="@+id/nav_settings"

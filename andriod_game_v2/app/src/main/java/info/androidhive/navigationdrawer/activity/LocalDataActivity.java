@@ -3,6 +3,7 @@ package info.androidhive.navigationdrawer.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,11 +34,14 @@ public class LocalDataActivity extends AppCompatActivity {
     int TIME_OUT_SLOW = 20000;
     int TIME_OUT_SUPER_SLOW = 30000;
 
+    Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_data);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        handler = new android.os.Handler();
 
         check_game = (RadioGroup) findViewById(R.id.check_game);
 
@@ -144,7 +148,7 @@ public class LocalDataActivity extends AppCompatActivity {
         progressDialog.setMessage(getString(String_id));
         progressDialog.show();
 
-        new android.os.Handler().postDelayed(
+        handler.postDelayed(
                 new Runnable() {
                     public void run() {
                         Intent i = new Intent(LocalDataActivity.this, LocalDataActivity.class);
@@ -170,5 +174,11 @@ public class LocalDataActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
+        finish();
     }
 }

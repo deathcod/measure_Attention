@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
@@ -30,7 +31,6 @@ public class chess_game_screen extends Activity {
     ImageView question[] = new ImageView[6];
     ImageButton answer[] = new ImageButton[6];
     TextView timer, dispScore, dispLevel, txtART;
-    ImageButton back;
     Chronometer stopWatch;
     Bundle b1;
 
@@ -53,6 +53,7 @@ public class chess_game_screen extends Activity {
             R.id.imageBtn4,
             R.id.imageBtn5,
             R.id.imageBtn6};
+    Handler handler;
     private int[] image_resources;
     private int[] ans_resources;
     private int chessObjs[] = {
@@ -103,6 +104,7 @@ public class chess_game_screen extends Activity {
         stopWatch = (Chronometer) findViewById(R.id.chronometer);
         stopWatch.setVisibility(View.INVISIBLE);
 
+        handler = new android.os.Handler();
         b1 = getIntent().getExtras();
         l = Integer.parseInt(b1.getString("game_level"));
         dispLevel.setText("Level: " + l);
@@ -177,7 +179,7 @@ public class chess_game_screen extends Activity {
         progressDialog.setMessage(getString((l <= 3) ? R.string.sd : R.string.cs));
         progressDialog.show();
 
-        new android.os.Handler().postDelayed(
+        handler.postDelayed(
                 new Runnable() {
                     public void run() {
 
@@ -244,7 +246,9 @@ public class chess_game_screen extends Activity {
 
     @Override
     public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
         Intent i = new Intent(chess_game_screen.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }

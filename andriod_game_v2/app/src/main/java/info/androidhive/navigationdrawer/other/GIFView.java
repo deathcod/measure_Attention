@@ -6,67 +6,93 @@ package info.androidhive.navigationdrawer.other;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Movie;
+import android.net.Uri;
+import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
-
-import info.androidhive.navigationdrawer.R;
 
 
 public class GIFView extends View {
-    public Movie mMovie;
-    public long movieStart;
-    private int gifId = -1;
+    private InputStream mInputStream;
+    private Movie mMovie;
+    private int mWidth, mHeight;
+    private long mStart;
+    private Context mContext;
 
     public GIFView(Context context) {
         super(context);
-        initializeView();
+        this.mContext = context;
     }
 
     public GIFView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initializeView();
+        this(context, attrs, 0);
     }
 
-    public GIFView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        initializeView();
+    public GIFView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        this.mContext = context;
+        if (attrs.getAttributeName(1).equals("background")) {
+            String id = attrs.getAttributeValue(1).substring(1);
+            setGifImageResource(Integer.parseInt(id));
+        }
     }
 
-    private void initializeView() {
-//R.drawable.loader - our animated GIF
-        InputStream is = getContext().getResources().openRawResource(R.drawable.congratulations1);
 
-        if (gifId != -1)
-            is = getContext().getResources().openRawResource(gifId);
-        mMovie = Movie.decodeStream(is);
+    private void init() {
+        setFocusable(true);
+        mMovie = Movie.decodeStream(mInputStream);
+        mWidth = mMovie.width();
+        mHeight = mMovie.height();
+
+        requestLayout();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(mWidth, mHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.TRANSPARENT);
-        super.onDraw(canvas);
-        long now = android.os.SystemClock.uptimeMillis();
-        if (movieStart == 0) {
-            movieStart = now;
+
+        long now = SystemClock.uptimeMillis();
+
+        if (mStart == 0) {
+            mStart = now;
         }
+
         if (mMovie != null) {
-            int relTime = (int) ((now - movieStart) % mMovie.duration());
+
+            int duration = mMovie.duration();
+            if (duration == 0) {
+                duration = 1000;
+            }
+
+            int relTime = (int) ((now - mStart) % duration);
+
             mMovie.setTime(relTime);
-            mMovie.draw(canvas, getWidth() - mMovie.width(), getHeight() - mMovie.height());
-            this.invalidate();
+
+            mMovie.draw(canvas, 0, 0);
+            invalidate();
         }
     }
 
-    public int getGIFResource() {
-        return this.gifId;
+    public void setGifImageResource(int id) {
+        mInputStream = mContext.getResources().openRawResource(id);
+        init();
     }
 
-    public void setGIFResource(int resId) {
-        this.gifId = resId;
-        initializeView();
+    public void setGifImageUri(Uri uri) {
+        try {
+            mInputStream = mContext.getContentResolver().openInputStream(uri)	;
+            init();
+        } catch (FileNotFoundException e) {
+            Log.e("GIfImageView", "File not found");
+        }
     }
 }

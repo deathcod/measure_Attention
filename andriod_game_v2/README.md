@@ -25,10 +25,12 @@ Apply this in the xml to use the gif
 and in the java code.
 ```
 GIFView gifview = (GIFView) findViewById(R.id.my_gif_picture_id) 
-gifview.setGIFResource(R.drawable.my_gif_picture)
+gifview.setGifImageResource(R.drawable.my_gif_picture)
 ```
 Here ```my_gif_picture``` is the picture to be applied in the layout.
 
+Also go to the respective activity this class belongs to and add this line  
+android:hardwareAccelerated="false"  
 _____
 
 ## PROBLEM FACED
@@ -246,10 +248,10 @@ This will trigger the loadfragment to load this particular fragment.
     - game_orientation : landscape or portrait
 * Now as soon as the game for a level is developed make a store of the number of clicks and response of clicks in that level(Please do refer any inbuild game). and store it in the click_count
 
-```click_detail.set_click_details(Long.toString(System.currentTimeMillis()), (flag == 0) ? "W" : "C");```
+```click_detail.set_click_details(Long.toString(System.currentTimeMillis()/1000), (flag == 0) ? "W" : "C");```
 This is from the chess class to store the click details. Here flag is true then its correct result is clicked.
 
-```final Intent i = new Intent(chess_game_screen.this, (l <= 3) ? LevelActivity.class : ScoreActivity.class);```
+```final Intent i = new Intent(demo_game_game_screen.this, (l <= 3) ? LevelActivity.class : ScoreActivity.class);```
 
 Set the intend to levelActivity if its less than equal to 3 else the scoreActivity as the chess game has only four level so last level is redirected to the scoreActivity layout
 
@@ -268,6 +270,12 @@ so first removing the data of "game_level" and "data" from the bundle. As these 
 
 After having placed the value as mentioned in the above json save the data in the bundle and also increment the level.
 ```java
+	final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
+        if (l > 3) {
+            sp.set_game_score(demo_game_game_screen.this, data.get_data_JA());
+            sp.async_response_modified(demo_game_game_screen.this, 10000);
+        }
+
         final ProgressDialog progressDialog = new ProgressDialog(chess_game_screen.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -279,6 +287,9 @@ After having placed the value as mentioned in the above json save the data in th
                     public void run() {
 
                         startActivity(i);
+			if (l > 3 && !sp.is_connected()) {
+                            sp.put_local_data(demo_game_game_screen.this, data.get_data_JA());
+                        }
                         finish();
                         progressDialog.dismiss();
                     }

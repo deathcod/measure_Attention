@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,13 +21,14 @@ import java.util.Random;
 public class game_screen extends Activity
 {
     private static int SPLASH_TIME_OUT = 3;
+    private static int FADE_OUT_BUTTON = 3000;
     final Random rnd = new Random();
-    int level,time_to_diaplay;
+    int level, time_to_diaplay, exp_round_counter;
     String str, game_name;
     Handler handler;
     ImageView image;
     GifImageView gif;
-    TextView text;
+    TextView text, brain_exp_remark;
     Pair<String, Boolean> exp;
     int button_id[] = {
             R.id.brain_button_1,
@@ -60,13 +63,15 @@ public class game_screen extends Activity
         Bundle b1 = getIntent().getExtras();
         level= b1.getInt("level");    //receives the level number intended from level.java
         game_name = b1.getString("game_name");
-        time_to_diaplay = rnd.nextInt(7) + SPLASH_TIME_OUT;
+        time_to_diaplay = level + SPLASH_TIME_OUT;
+        exp_round_counter = Integer.MAX_VALUE;
         handler = new Handler();
         setContentView(R.layout.game_screen);
 
         image = (ImageView) findViewById(R.id.brain_image);  //image to be displayed
         gif   = (GifImageView) findViewById(R.id.brain_gif);
         text  = (TextView) findViewById(R.id.brain_text);
+        brain_exp_remark = (TextView) findViewById(R.id.brain_exp_remark);
         for (int i = 0; i < 4; i++)
             buttons[i] = (Button) findViewById(button_id[i]);
     }
@@ -93,7 +98,7 @@ public class game_screen extends Activity
 
         if (level <= 3)
         {
-            str = game_name + "_" + Integer.toString(level) + "_" + Integer.toString(rnd.nextInt(5)+1);
+            str = game_name + "_" + Integer.toString(level) + "_" + Integer.toString((time_to_diaplay - level - SPLASH_TIME_OUT)/2+1);
             int drawable_id = getStringIdentifier(game_screen.this, "drawable", str);
 
             if (level == 1)
@@ -113,6 +118,12 @@ public class game_screen extends Activity
         {
             current_view = (LinearLayout) findViewById(R.id.brain_l_text);
             current_view.setVisibility(View.VISIBLE);
+            exp_round_counter = (time_to_diaplay - level + 1)/2; // this will display 2,3,4,5,6
+            brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answer");
+            for (int i=0 ;i<4;i++) {
+                buttons[i].setEnabled(false);
+                buttons[i].setBackgroundColor(getResources().getColor(R.color.monsoon));
+            }
             expression_round();
         }
         handler.postDelayed(new Runnable() {
@@ -124,17 +135,29 @@ public class game_screen extends Activity
                 int time_in_button[] = {time_to_diaplay + x + 1, time_to_diaplay + x + 2, time_to_diaplay + x + 3, time_to_diaplay + x + 4};
                 time_in_button = pickNrandom(time_in_button, 4);
 
+                //setting up the animation on the text view
+                final Animation out = new AlphaAnimation(1.0f, 0.4f);
+                out.setDuration(FADE_OUT_BUTTON);
+
                 for (int i = 0; i < 4; i++) {
                     buttons[i].setText(Integer.toString(time_in_button[i]));
                     buttons[i].setClickable(true);
                     buttons[i].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            rounds();
+
                         }
                     });
+                    buttons[i].startAnimation(out);
                 }
 
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        time_to_diaplay += 2;
+                        rounds();
+                        }
+                    },FADE_OUT_BUTTON);
 
                 /*
                 Intent s = new Intent(game_screen.this, quiz_screen.class);
@@ -143,7 +166,7 @@ public class game_screen extends Activity
                 startActivity(s);
                 */
             }
-        }, time_to_diaplay * 1000);
+        }, (time_to_diaplay + rnd.nextInt(7)) * 1000);
     }
 
     // this is for the fourth and fifth round
@@ -171,6 +194,24 @@ public class game_screen extends Activity
         x.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //incrementing the counter value if correct value is clicked
+                if(z == true)
+                {
+                    exp_round_counter--;
+                    if(exp_round_counter == 0)
+                    {
+                        for(int i=0; i<4;i++)
+                        {
+                            buttons[i].setEnabled(true);
+                            buttons[i].setBackgroundColor(getResources().getColor(R.color.iron));
+                        }
+                        brain_exp_remark.setText("Success!!");
+                    }
+                    else
+                        brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answer");
+                }
+
                 x.setBackgroundColor(getResources().getColor((z == true) ? R.color.green : R.color.red));
                 x.setClickable(false);
                 y.setClickable(false);
@@ -179,7 +220,7 @@ public class game_screen extends Activity
                     public void run() {
                         expression_round();
                     }
-                }, 1000);
+                }, 200);
             }
         });
     }
@@ -222,7 +263,30 @@ public class game_screen extends Activity
         Boolean answer = false;
         String expression = "";
 
-        int exp_pattern = (level == 4) ? 0 : rnd.nextInt(3) + 1;
+        int exp_pattern = 0;
+        int internal_round = (time_to_diaplay - level - SPLASH_TIME_OUT)/2 +1;
+
+        if(level == 4)
+        {
+            if(internal_round == 3)
+                exp_pattern = rnd.nextInt(2) == 0? 0: 1;
+            else if(internal_round == 4)
+                exp_pattern = rnd.nextInt(2) == 0? 0: 2;
+            else if(internal_round == 5)
+                exp_pattern = rnd.nextInt(2) == 0? 0: 3;
+        }
+
+        if(level == 5)
+        {
+            if(internal_round <=2)
+                exp_pattern = internal_round;
+            else if(internal_round == 3)
+                exp_pattern = 1 + rnd.nextInt(3);
+            else if(internal_round == 4)
+                exp_pattern = 2 + rnd.nextInt(2);
+            else if(internal_round == 5)
+                exp_pattern = rnd.nextInt(4);
+        }
 
         switch (exp_pattern) {
             case 0:

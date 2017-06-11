@@ -65,5 +65,6 @@ public class ScoreActivity extends Activity {
     public void onBackPressed() {
         Intent i = new Intent(ScoreActivity.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }

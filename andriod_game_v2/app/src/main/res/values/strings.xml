@@ -11,6 +11,7 @@
     <string name="nav_chess">Chess</string>
     <string name="nav_card_game">Card Game</string>
     <string name="nav_test_your_brain">Test your Brain</string>
+    <string name="nav_brain_challenge">Brain Challenge</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
 
@@ -22,6 +23,7 @@
         <item>Chess</item>
         <item>Card Game</item>
         <item>Test your Brain</item>
+        <item>Brain Challenge</item>
 
         <item>Settings</item><!-- Keep settings in the last always-->
     </string-array>
@@ -38,7 +40,7 @@
     <string name="detail_chess">Based on SPAN task, in this game a person has to recall six objects in the order mentioned.</string>
     <string name="detail_card_game">Based on SPAN task, in this game a person has to recall 5 out of 10 objects shown previously in random order.</string>
     <string name="detail_test_your_brain">Based on the concept of PAIRED CANCELLATION task, in this game a person has to correctly identify the presence of two images in order.</string>
-
+    <string name="detail_brain_challenge">enter detail here</string>
 
     <!-- The instruction for stroop game-->
     <string name="stroop_ins_L1">Choose the CORRECT COLOR \nfor the given text.</string>
@@ -61,6 +63,13 @@
     <string name="test_your_brain_ins_L3">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in “left to right order” tap on the green tick button.\n Otherwise tap on the red cross button.</string>
     <string name="test_your_brain_ins_L4">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in “right to left order” tap on the green tick button.\n Otherwise tap on the red cross button.</string>
     <string name="test_your_brain_ins_L5">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in the order indicated by the violet arrow that appears showing left or right randomly on the screen each turn, tap on the green tick button to score.\n Otherwise tap on the red cross button.</string>
+
+    <!-- The instruction for brain challenege game-->
+    <string name="brain_challenge_ins_L1">Level 1 instruction</string>
+    <string name="brain_challenge_ins_L2">Level 2 instruction</string>
+    <string name="brain_challenge_ins_L3">Level 3 instruction</string>
+    <string name="brain_challenge_ins_L4">Level 4 instruction</string>
+    <string name="brain_challenge_ins_L5">Level 5 instruction</string>
 
     <!-- local data instruction-->
     <string name="local_data_ins">You can upload your local data here \nif somehow data wont get to the server.</string>

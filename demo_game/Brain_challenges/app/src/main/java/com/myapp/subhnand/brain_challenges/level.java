@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 public class level extends Activity {
 
    // ImageButton exit;
-    Button l1, l2, l3, l4;
+    Button l1, l2, l3, l4, l5;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.levels);
@@ -25,6 +25,7 @@ public class level extends Activity {
         l2 = (Button) findViewById(R.id.btnLevel2);
         l3 = (Button) findViewById(R.id.btnLevel3);
         l4 = (Button) findViewById(R.id.btnLevel4);
+        l5 = (Button) findViewById(R.id.btnLevel5);
         addListenerOnButton();
     }
 /*
@@ -61,6 +62,14 @@ public class level extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(level.this, game_screen.class);
                 i.putExtra("level", 4);
+                i.putExtra("game_name", "brain_challenge");
+                startActivity(i);
+            }
+        });
+        l5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(level.this, game_screen.class);
+                i.putExtra("level", 5);
                 i.putExtra("game_name", "brain_challenge");
                 startActivity(i);
             }

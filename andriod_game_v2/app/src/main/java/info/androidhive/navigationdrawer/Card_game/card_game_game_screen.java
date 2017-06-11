@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
@@ -34,12 +35,12 @@ public class card_game_game_screen extends Activity {
     long startTime, countUp;
     Bundle b1 = null; // bundle;
     JSONData click_detail;
+    Handler handler;
     //char card_seq[] = {'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'D', 'J', 'Q'};
     private int all_cards[] = {R.drawable.card_game_kingofclubs, R.drawable.card_game_oneofclubs, R.drawable.card_game_twoofclubs, R.drawable.card_game_threeofclubs, R.drawable.card_game_fourofclubs, R.drawable.card_game_fiveofclubs, R.drawable.card_game_sixofclubs, R.drawable.card_game_sevenofclubs, R.drawable.card_game_eightofclubs, R.drawable.card_game_nineofclubs, R.drawable.card_game_tenofclubs, R.drawable.card_game_jackofclubs, R.drawable.card_game_queenofclubs,
             R.drawable.card_game_kingofdiamonds, R.drawable.card_game_oneofdiamonds, R.drawable.card_game_twoofdiamonds, R.drawable.card_game_threeofdiamonds, R.drawable.card_game_fourofdiamonds, R.drawable.card_game_fiveofdiamonds, R.drawable.card_game_sixofdiamonds, R.drawable.card_game_sevenofdiamonds, R.drawable.card_game_eightofdiamonds, R.drawable.card_game_nineofdiamonds, R.drawable.card_game_tenofdiamonds, R.drawable.card_game_jackofdiamonds, R.drawable.card_game_queenofdiamonds,
             R.drawable.card_game_kingofhearts, R.drawable.card_game_oneofhearts, R.drawable.card_game_twoofhearts, R.drawable.card_game_threeofhearts, R.drawable.card_game_fourofhearts, R.drawable.card_game_fiveofhearts, R.drawable.card_game_sixofhearts, R.drawable.card_game_sevenofhearts, R.drawable.card_game_eightofhearts, R.drawable.card_game_nineofhearts, R.drawable.card_game_tenofhearts, R.drawable.card_game_jackofhearts, R.drawable.card_game_queenofhearts,
             R.drawable.card_game_kingofspades, R.drawable.card_game_oneofspades, R.drawable.card_game_twoofspades, R.drawable.card_game_threeofspades, R.drawable.card_game_fourofspades, R.drawable.card_game_fiveofspades, R.drawable.card_game_sixofspades, R.drawable.card_game_sevenofspades, R.drawable.card_game_eightofspades, R.drawable.card_game_nineofspades, R.drawable.card_game_tenofspades, R.drawable.card_game_jackofspades, R.drawable.card_game_queenofspades};
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class card_game_game_screen extends Activity {
         tScore = (TextView) findViewById(R.id.txtScore);
         stopWatch = (Chronometer) findViewById(R.id.chronometer);
         stopWatch.setVisibility(View.INVISIBLE);
+        handler = new android.os.Handler();
 
         for (int i = 0; i < 5; i++) {
             img[i] = (ImageView) findViewById(imageNum[i]);
@@ -192,7 +194,7 @@ public class card_game_game_screen extends Activity {
                         progressDialog.setMessage(getString((l <= 3) ? R.string.sd : R.string.cs));
                         progressDialog.show();
 
-                        new android.os.Handler().postDelayed(
+                        handler.postDelayed(
                                 new Runnable() {
                                     public void run() {
 
@@ -217,7 +219,9 @@ public class card_game_game_screen extends Activity {
 
     @Override
     public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
         Intent i = new Intent(card_game_game_screen.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }

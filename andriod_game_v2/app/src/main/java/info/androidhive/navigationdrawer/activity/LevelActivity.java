@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ import info.androidhive.navigationdrawer.R;
 
 public class LevelActivity extends Activity {
 
+    Handler handler;
+
     public static int getStringIdentifier(Context context, String resource, String name) {
         return context.getResources().getIdentifier(name, resource, context.getPackageName());
     }
@@ -28,6 +31,7 @@ public class LevelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
         final Bundle b1 = getIntent().getExtras();
+        handler = new android.os.Handler();
 
         final String game_name = b1.getString("game_name");
         String game_level = b1.getString("game_level");
@@ -72,7 +76,7 @@ public class LevelActivity extends Activity {
                     progressDialog.setMessage(getString(R.string.l));
                     progressDialog.show();
 
-                    new android.os.Handler().postDelayed(
+                    handler.postDelayed(
                             new Runnable() {
                                 public void run() {
 
@@ -93,7 +97,9 @@ public class LevelActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
         Intent i = new Intent(LevelActivity.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }

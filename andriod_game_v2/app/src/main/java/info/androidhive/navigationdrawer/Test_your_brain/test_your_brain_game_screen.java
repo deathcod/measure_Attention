@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -43,6 +44,7 @@ public class test_your_brain_game_screen extends Activity {
     int volume = 100;
     Bundle b1 = null;
     JSONData click_detail;
+    Handler handler;
     private int all_images[] = {R.drawable.test_your_brain_bear, R.drawable.test_your_brain_cat, R.drawable.test_your_brain_cow, R.drawable.test_your_brain_crocodile, R.drawable.test_your_brain_dog, R.drawable.test_your_brain_elephant, R.drawable.test_your_brain_goat, R.drawable.test_your_brain_horse, R.drawable.test_your_brain_lion, R.drawable.test_your_brain_monkey, R.drawable.test_your_brain_rabbit, R.drawable.test_your_brain_sheep, R.drawable.test_your_brain_squirrel, R.drawable.test_your_brain_tiger, R.drawable.test_your_brain_wolf};
     private int image_resources[] = new int[6];
 
@@ -61,6 +63,7 @@ public class test_your_brain_game_screen extends Activity {
         b1 = getIntent().getExtras();
         level = Integer.parseInt(b1.getString("game_level"));
 
+        handler = new android.os.Handler();
         textLevelView = (TextView) findViewById(R.id.textLevelView);
         textLevelView.setText("Level : " + level);
         level--;
@@ -155,7 +158,7 @@ public class test_your_brain_game_screen extends Activity {
                 progressDialog.setMessage(getString((level <= 4) ? R.string.sd : R.string.cs));
                 progressDialog.show();
 
-                new android.os.Handler().postDelayed(
+                handler.postDelayed(
                         new Runnable() {
                             public void run() {
 
@@ -389,7 +392,9 @@ public class test_your_brain_game_screen extends Activity {
 
     @Override
     public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
         Intent i = new Intent(test_your_brain_game_screen.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }

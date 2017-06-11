@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_CHESS = "chess";
     private static final String TAG_CARD_GAME = "card_game";
     private static final String TAG_TEST_YOUR_BRAIN = "test_your_brain";
+    private static final String TAG_BRAIN_CHALLENGE = "brain_challenge";
     private static final String TAG_SETTING = "settings";
     // index to identify current nav menu item
-    public static int navItemIndex = 4;
+    public static int navItemIndex = 5;
     //private FloatingActionButton fab;
 
     // urls to load navigation header background image
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         setUpNavigationView();
 
         if (savedInstanceState == null) {
-            navItemIndex = 4;
+            navItemIndex = 5;
             CURRENT_TAG = TAG_SETTING;
             loadHomeFragment();
         }
@@ -199,6 +200,11 @@ public class MainActivity extends AppCompatActivity {
                 MainFragment Test_your_brain = new MainFragment().newInstance(TAG_TEST_YOUR_BRAIN, "landscape");
                 return Test_your_brain;
 
+            case 4:
+                // brain_challenge
+                MainFragment Brain_challenge = new MainFragment().newInstance(TAG_BRAIN_CHALLENGE, "landscape");
+                return Brain_challenge;
+
             default:
                 // settings fragment
                 MainFragment settingsFragment = new MainFragment().newInstance(TAG_SETTING, "portrait");
@@ -237,12 +243,16 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_CARD_GAME;
                         break;
-                    case R.id.nav_tesr_your_brain:
+                    case R.id.nav_test_your_brain:
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_TEST_YOUR_BRAIN;
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_brain_challenge:
                         navItemIndex = 4;
+                        CURRENT_TAG = TAG_BRAIN_CHALLENGE;
+                        break;
+                    case R.id.nav_settings:
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_SETTING;
                         break;
                     case R.id.nav_about_us:
@@ -256,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawers();
                         return true;
                     default:
-                        navItemIndex = 4;
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_SETTING;
                 }
 

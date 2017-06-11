@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class stroop_game_screen extends Activity {
     int count = 0;
     long now, then;
     JSONData click_detail;
+    Handler handler;
 
     public static int[] pickNrandom(int[] array, int n) {
         List<Integer> list = new ArrayList<Integer>(array.length);
@@ -75,6 +77,8 @@ public class stroop_game_screen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stroop_game_screen);
+
+        handler = new android.os.Handler();
 
         for (int i = 0; i < 4; i++)
             b[i] = (Button) findViewById(button_id[i]);
@@ -121,7 +125,7 @@ public class stroop_game_screen extends Activity {
             progressDialog.setMessage(getString((R.string.cs)));
             progressDialog.show();
 
-            new android.os.Handler().postDelayed(
+            handler.postDelayed(
                     new Runnable() {
                         public void run() {
 
@@ -177,7 +181,9 @@ public class stroop_game_screen extends Activity {
 
     @Override
     public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
         Intent i = new Intent(stroop_game_screen.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 }
