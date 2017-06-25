@@ -41,8 +41,8 @@ public class SharedPreference {
         HOSTNAME = "http://";
     }
 
-    public void async_response_modified(Context context, int timeout) {
-        fetchData = new FetchData(context, API, DATA, timeout);
+    public void async_response_modified(Context context, int timeout, boolean showToken) {
+        fetchData = new FetchData(context, API, DATA, timeout, showToken);
         fetchData.execute();
     }
 
@@ -260,7 +260,7 @@ public class SharedPreference {
             if (get_one_String(context, "flag").equals("0") && SP_array.length() != 0) {
                 putString(context, new JSONObject().put("flag", "1").toString());
                 set_game_score(context, SP_array.optJSONArray(0));
-                async_response_modified(context, 20000);
+                async_response_modified(context, 20000, true);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
                             @RequiresApi(api = Build.VERSION_CODES.KITKAT)

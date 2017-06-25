@@ -10,15 +10,22 @@
         android:id="@+id/game_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.9"
         android:gravity="center"
         android:text="TextView" />
 
-    <info.androidhive.navigationdrawer.other.GIFView
-        android:id="@+id/nature_gif"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         />
+        android:layout_weight="0.4"
+        android:orientation="horizontal">
+
+        <info.androidhive.navigationdrawer.other.GIFView
+            android:id="@+id/nature_gif"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 
     <Button
         android:id="@+id/game_enter"

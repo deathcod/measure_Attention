@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        navItemIndex = 4;
+        navItemIndex = 5;
         CURRENT_TAG = TAG_SETTING;
         loadHomeFragment();
     }

@@ -17,13 +17,14 @@ import info.androidhive.navigationdrawer.other.SharedPreference;
 
 public class LocalDataActivity extends AppCompatActivity {
 
-    TextView text_stroop, text_chess, text_card_game, text_test_your_brain;
+    TextView text_stroop, text_chess, text_card_game, text_test_your_brain, text_brain_challenge;
     SharedPreference sp;
     int RadioCheckButton[] = {
             R.id.check_stroop,
             R.id.check_chess,
             R.id.check_card_game,
-            R.id.check_test_your_brain
+            R.id.check_test_your_brain,
+            R.id.check_brain_challenge
     };
     Button check_upload, check_clear;
     RadioGroup check_game;
@@ -49,6 +50,7 @@ public class LocalDataActivity extends AppCompatActivity {
         text_chess = (TextView) findViewById(R.id.text_chess);
         text_card_game = (TextView) findViewById(R.id.text_card_game);
         text_test_your_brain = (TextView) findViewById(R.id.text_test_your_brain);
+        text_brain_challenge = (TextView) findViewById(R.id.text_brain_challenge);
 
         check_upload = (Button) findViewById(R.id.check_upload);
         check_clear = (Button) findViewById(R.id.check_clear);
@@ -87,6 +89,7 @@ public class LocalDataActivity extends AppCompatActivity {
         text_chess.setText(Integer.toString(game_data[1]));
         text_card_game.setText(Integer.toString(game_data[2]));
         text_test_your_brain.setText(Integer.toString(game_data[3]));
+        text_brain_challenge.setText(Integer.toString(game_data[4]));
 
         //This stores the first index which is clickable check button
         int can_click_button = -1;
@@ -118,7 +121,7 @@ public class LocalDataActivity extends AppCompatActivity {
 
                 //TODO This has to be refactored as games name shouldn't be written exclusively here. Think for dynamicity!!
                 int set_time_out = TIME_OUT_MEDIUM;
-                if (game_name.equals("stroop"))
+                if (game_name.equals("stroop") || game_name.equals("brain_challenge"))
                     set_time_out = TIME_OUT_FAST;
                 else if(game_name.equals("test_your_brain"))
                     set_time_out = TIME_OUT_SLOW;

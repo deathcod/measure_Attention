@@ -305,6 +305,13 @@ Change the number of levels the game is meant for. Like if the game has 5 levels
     - setup the game description by "details_<TAG_NAME>"
     - setup the game instruction by "<TAG_NAME>_ins_L<level number>" [TAG_NAME is set in the MainActivity and is forwarded. So keep that discipline.]
 
+Now the game will function properly.
+Lets move to LocalDataActivity
+
+* go to activity_local_data.xml, add check_demo_game, text_demo_game
+* now in the LocalDataActivity.java
+ - Add the radiobuttonid, also create a new textview
+
 Coding in this layout which I created is not difficult by please do flow the coding culture and design I am trying to follow so that others can contribute effectively.
 
 

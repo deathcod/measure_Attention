@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,12 +29,14 @@ public class FetchData extends AsyncTask<Void, Void, String> {
     private String API, JSON, DATA, GAME_NAME;
     private Context context;
     private int timeout;
+    private boolean showToast;
 
-    public FetchData(Context context, String API, String DATA, int timeout) {
+    public FetchData(Context context, String API, String DATA, int timeout,boolean showToast) {
         this.API = API;
         this.DATA = DATA;
         this.context = context;
         this.timeout = timeout;
+        this.showToast = showToast;
         JSON = "{}";
         flag = 0;
     }
@@ -135,6 +138,9 @@ public class FetchData extends AsyncTask<Void, Void, String> {
     private void CreateToken(Context context, String remark) {
 
         //uncomment for testing using Toast.
-        //Toast.makeText(context, remark, Toast.LENGTH_SHORT).show();
+        if(showToast)
+        {
+            Toast.makeText(context, remark, Toast.LENGTH_SHORT).show();
+        }
     }
 }

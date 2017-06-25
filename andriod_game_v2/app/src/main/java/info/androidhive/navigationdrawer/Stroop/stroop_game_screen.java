@@ -117,7 +117,7 @@ public class stroop_game_screen extends Activity {
 
             final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
             sp.set_game_score(stroop_game_screen.this, data.get_data_JA());
-            sp.async_response_modified(stroop_game_screen.this, 10000);
+            sp.async_response_modified(stroop_game_screen.this, 10000, true);
 
             final ProgressDialog progressDialog = new ProgressDialog(stroop_game_screen.this,
                     R.style.AppTheme_Dark_Dialog);

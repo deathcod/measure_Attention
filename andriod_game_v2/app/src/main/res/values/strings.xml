@@ -65,11 +65,11 @@
     <string name="test_your_brain_ins_L5">Two images presented in hexagonal shape and three images presented in square shape appear in the screen.\n If both the images present in hexagonal shape are present among the images presented in square shapes in the order indicated by the violet arrow that appears showing left or right randomly on the screen each turn, tap on the green tick button to score.\n Otherwise tap on the red cross button.</string>
 
     <!-- The instruction for brain challenege game-->
-    <string name="brain_challenge_ins_L1">Level 1 instruction</string>
-    <string name="brain_challenge_ins_L2">Level 2 instruction</string>
-    <string name="brain_challenge_ins_L3">Level 3 instruction</string>
-    <string name="brain_challenge_ins_L4">Level 4 instruction</string>
-    <string name="brain_challenge_ins_L5">Level 5 instruction</string>
+    <string name="brain_challenge_ins_L1">A static image will be presented. Guess the time (in seconds) for which it was displayed.</string>
+    <string name="brain_challenge_ins_L2">A figure in motion will be presented. Guess the time (in seconds) for which it was displayed.</string>
+    <string name="brain_challenge_ins_L3">A figure in motion will be presented. Guess the time (in seconds) for which it was displayed.</string>
+    <string name="brain_challenge_ins_L4">Try to solve the simple mathematical problems that are shown in the screen. \n Once you give the requisite number of corrects answers, further instructions will be provided!</string>
+    <string name="brain_challenge_ins_L5">Try to solve the simple mathematical problems that are shown in the screen. \n Once you give the requisite number of corrects answers, further instructions will be provided!</string>
 
     <!-- local data instruction-->
     <string name="local_data_ins">You can upload your local data here \nif somehow data wont get to the server.</string>

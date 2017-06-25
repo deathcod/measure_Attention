@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.Random;
 
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.activity.LevelActivity;
+import info.androidhive.navigationdrawer.activity.MainActivity;
 import info.androidhive.navigationdrawer.activity.ScoreActivity;
 import info.androidhive.navigationdrawer.other.GIFView;
 import info.androidhive.navigationdrawer.other.JSONData;
@@ -36,14 +38,14 @@ import static info.androidhive.navigationdrawer.R.string.l;
 public class brain_challenge_game_screen extends Activity{
 
     private static int SPLASH_TIME_OUT = 3;
-    private static int FADE_OUT_BUTTON = 3000;
+    private static int FADE_OUT_BUTTON = 4000;
     final Random rnd = new Random();
     int level, time_to_diaplay, exp_round_counter;
     String str, game_name;
     Handler handler;
     ImageView image;
     GIFView gif;
-    TextView text, brain_exp_remark;
+    TextView text, brain_exp_remark, brain_main_ques;
     Pair<String, Boolean> exp;
     int button_id[] = {
             R.id.brain_button_1,
@@ -96,6 +98,7 @@ public class brain_challenge_game_screen extends Activity{
 
         click_detail = new JSONData("JA");
         click_count = 0;
+        score = 0;
 
         for (int i = 0; i < 4; i++)
             buttons[i] = (Button) findViewById(button_id[i]);
@@ -111,17 +114,15 @@ public class brain_challenge_game_screen extends Activity{
     @Override
     public void onBackPressed() {
         handler.removeCallbacksAndMessages(null);
+        Intent i = new Intent(brain_challenge_game_screen.this, MainActivity.class);
+        startActivity(i);
         finish();
     }
 
     private void rounds() {
 
-        // initialization in the questioning side
-        for (int i = 0; i < 4; i++) {
-            buttons[i].setText("");
-            buttons[i].setClickable(false);
-        }
-
+        brain_main_ques=(TextView)findViewById(R.id.brain_main_ques);
+        brain_main_ques.setText("FOR HOW MUCH TIME WAS THE FIGURE DISPLAYED?");
         if (level <= 3)
         {
             str = game_name + "_" + Integer.toString(level) + "_" + Integer.toString((time_to_diaplay - level - SPLASH_TIME_OUT)/2+1);
@@ -129,6 +130,7 @@ public class brain_challenge_game_screen extends Activity{
 
             if (level == 1)
             {
+                brain_main_ques.setText("FOR HOW MUCH TIME WAS THE MOTION DISPLAYED?");
                 image.setImageDrawable(getResources().getDrawable(drawable_id));
                 current_view = (LinearLayout) findViewById(R.id.brain_l_image);
                 current_view.setVisibility(View.VISIBLE);
@@ -145,11 +147,7 @@ public class brain_challenge_game_screen extends Activity{
             current_view = (LinearLayout) findViewById(R.id.brain_l_text);
             current_view.setVisibility(View.VISIBLE);
             exp_round_counter = (time_to_diaplay - level + 1)/2; // this will display 2,3,4,5,6
-            brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answer");
-            for (int i=0 ;i<4;i++) {
-                buttons[i].setEnabled(false);
-                buttons[i].setBackgroundColor(getResources().getColor(R.color.monsoon));
-            }
+            brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answers");
             expression_round();
         }
         final int TIME_OUT = (time_to_diaplay + rnd.nextInt(7));
@@ -163,34 +161,47 @@ public class brain_challenge_game_screen extends Activity{
                 time_in_button = pickNrandom(time_in_button, 4);
 
                 //setting up the animation on the text view
-                final Animation out = new AlphaAnimation(1.0f, 0.4f);
+                final Animation out = new AlphaAnimation(1.0f, 0f);
                 out.setDuration(FADE_OUT_BUTTON);
 
-                for (int i = 0; i < 4; i++) {
-                    buttons[i].setText(Integer.toString(time_in_button[i]));
-                    buttons[i].setClickable(true);
-                    final int finalI = i;
-                    buttons[i].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String result = "W";
-                            click_count++;
-                            if(buttons[finalI].getText().equals(Integer.toString(TIME_OUT)))
-                            {
-                                score++;
-                                result = "C";
+                if(level<=3 || exp_round_counter<=0)
+                {
+                    for (int i = 0; i < 4; i++) {
+
+                        //initializing the buttons when question layout is set visible
+                        buttons[i].setText(Integer.toString(time_in_button[i]));
+                        buttons[i].setClickable(true);
+                        buttons[i].setVisibility(View.VISIBLE);
+
+                        final int finalI = i;
+                        buttons[i].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String result = "W";
+                                click_count++;
+                                if(buttons[finalI].getText().equals(Integer.toString(TIME_OUT)))
+                                {
+                                    score++;
+                                    result = "C";
+                                }
+                                click_detail.set_click_details(Long.toString(System.currentTimeMillis()/ 1000), result);
+                                for(int i=0 ; i<4; i++ )
+                                    buttons[i].setClickable(false);
                             }
-                            click_detail.set_click_details(Long.toString(System.currentTimeMillis()/ 1000), result);
-                            for(int i=0 ; i<4; i++ )
-                                buttons[i].setClickable(false);
-                        }
-                    });
-                    buttons[i].startAnimation(out);
+                        });
+                        buttons[i].startAnimation(out);
+                    }
                 }
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        // initialization in the questioning side
+                        for (int i = 0; i < 4; i++) {
+                            buttons[i].setVisibility(View.INVISIBLE);
+                            buttons[i].setClickable(false);
+                        }
+
                         if((time_to_diaplay - level - SPLASH_TIME_OUT)/2 +1 != 5)
                         {
                             time_to_diaplay += 2;
@@ -200,7 +211,10 @@ public class brain_challenge_game_screen extends Activity{
                         {
                             //if there is no click then play the level again
                             if(click_count == 0)
+                            {
                                 level--;
+                                Toast.makeText(brain_challenge_game_screen.this, "Since you didn't click any button, play the level again", Toast.LENGTH_LONG).show();
+                            }
 
                             final Intent i = new Intent(brain_challenge_game_screen.this, (level <= 4)? LevelActivity.class : ScoreActivity.class);
                             b1.remove("game_level");
@@ -217,36 +231,29 @@ public class brain_challenge_game_screen extends Activity{
                             final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
                             if (level > 4) {
                                 sp.set_game_score(brain_challenge_game_screen.this, data.get_data_JA());
-                                sp.async_response_modified(brain_challenge_game_screen.this, 10000);
+                                sp.async_response_modified(brain_challenge_game_screen.this, 10000, true);
                             }
                             final ProgressDialog progressDialog = new ProgressDialog(brain_challenge_game_screen.this, R.style.AppTheme_Dark_Dialog);
                             progressDialog.setIndeterminate(true);
                             progressDialog.setMessage(getString((level <= 4) ? R.string.sd : R.string.cs));
                             progressDialog.show();
 
-                            handler.postDelayed(
-                                    new Runnable() {
-                                        public void run() {
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
 
-                                            startActivity(i);
-                                            if (level >4 && !sp.is_connected()) {
-                                                sp.put_local_data(brain_challenge_game_screen.this, data.get_data_JA());
-                                            }
-                                            finish();
-                                            progressDialog.dismiss();
-                                        }
-                                    }, (l <= 3) ? 1000 : 10000);
+                                    startActivity(i);
+                                    if (level >4 && !sp.is_connected()) {
+                                        sp.put_local_data(brain_challenge_game_screen.this, data.get_data_JA());
+                                    }
+                                    finish();
+                                    progressDialog.dismiss();
+                                }
+                            }, (l <= 3) ? 1000 : 10000);
                         }
 
                     }
                 },FADE_OUT_BUTTON);
 
-                /*
-                Intent s = new Intent(game_screen.this, quiz_screen.class);
-                s.putExtra("time",time_to_diaplay);    // intend the time for which the image was displayed to quiz_screen.java
-                s.putExtra("level",level);   // intend the level for which the image was displayed to quiz_screen.java
-                startActivity(s);
-                */
             }
         }, TIME_OUT * 1000);
     }
@@ -263,8 +270,8 @@ public class brain_challenge_game_screen extends Activity{
         brain_text.setText(exp.first);
         brain_exp_correct.setClickable(true);
         brain_exp_wrong.setClickable(true);
-        brain_exp_correct.setBackgroundColor(getResources().getColor(R.color.white));
-        brain_exp_wrong.setBackgroundColor(getResources().getColor(R.color.white));
+        brain_exp_correct.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        brain_exp_wrong.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         //setting up the buttons
         expression_round_button(brain_exp_correct, brain_exp_wrong, exp.second == true);
@@ -283,15 +290,17 @@ public class brain_challenge_game_screen extends Activity{
                     exp_round_counter--;
                     if(exp_round_counter == 0)
                     {
-                        for(int i=0; i<4;i++)
-                        {
-                            buttons[i].setEnabled(true);
-                            buttons[i].setBackgroundColor(getResources().getColor(R.color.iron));
+                        for(int i=0; i<4;i++) {
+                            buttons[i].setVisibility(View.VISIBLE);
+                            buttons[i].setText("");
+//                            buttons[i].setBackgroundColor(getResources().getColor(R.color.iron));
                         }
-                        brain_exp_remark.setText("Success!!");
                     }
+
+                    if(exp_round_counter<=0)
+                        brain_exp_remark.setText("Success!!");
                     else
-                        brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answer");
+                        brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answers");
                 }
 
                 x.setBackgroundColor(getResources().getColor((z == true) ? R.color.green : R.color.red));
@@ -302,7 +311,7 @@ public class brain_challenge_game_screen extends Activity{
                     public void run() {
                         expression_round();
                     }
-                }, 200);
+                }, 100);
             }
         });
     }

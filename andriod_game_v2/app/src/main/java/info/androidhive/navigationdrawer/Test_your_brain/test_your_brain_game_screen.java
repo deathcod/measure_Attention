@@ -128,7 +128,7 @@ public class test_your_brain_game_screen extends Activity {
                 if (noOfClicks != 0)
                     AVERAGE_TIME = Integer.toString(totalTime / noOfClicks);
                 else {
-                    Toast.makeText(test_your_brain_game_screen.this, "Since you didnt click any button, play the level again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(test_your_brain_game_screen.this, "Since you didn't click any button, play the level again", Toast.LENGTH_LONG).show();
                     level--;
                 }
                 level++;
@@ -150,7 +150,7 @@ public class test_your_brain_game_screen extends Activity {
                     sp.set_game_score(test_your_brain_game_screen.this, data.get_data_JA());
                     i.removeExtra("data");
                     i.putExtra("data", sp.get_API() + "\n\n" + sp.get_DATA());
-                    sp.async_response_modified(test_your_brain_game_screen.this, 10000);
+                    sp.async_response_modified(test_your_brain_game_screen.this, 10000, true);
                 }
                 final ProgressDialog progressDialog = new ProgressDialog(test_your_brain_game_screen.this,
                         R.style.AppTheme_Dark_Dialog);

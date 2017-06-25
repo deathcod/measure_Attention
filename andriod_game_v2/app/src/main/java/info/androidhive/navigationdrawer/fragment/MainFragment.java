@@ -223,7 +223,7 @@ public class MainFragment extends Fragment {
                 //i.putExtra("data", x.get_data_string());
 
                 sp.set_settings(x.get_data_string_without_intend());
-                sp.async_response_modified(getActivity(), 10000);
+                sp.async_response_modified(getActivity(), 10000, true);
 
                 final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                         R.style.AppTheme_Dark_Dialog);
