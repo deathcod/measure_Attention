@@ -260,7 +260,7 @@ public class SharedPreference {
             if (get_one_String(context, "flag").equals("0") && SP_array.length() != 0) {
                 putString(context, new JSONObject().put("flag", "1").toString());
                 set_game_score(context, SP_array.optJSONArray(0));
-                async_response_modified(context, 20000, true);
+                async_response_modified(context, 20000, false);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
                             @RequiresApi(api = Build.VERSION_CODES.KITKAT)

@@ -95,6 +95,7 @@ public class brain_challenge_game_screen extends Activity{
         gif   = (GIFView) findViewById(R.id.brain_gif);
         text  = (TextView) findViewById(R.id.brain_text);
         brain_exp_remark = (TextView) findViewById(R.id.brain_exp_remark);
+        brain_main_ques=(TextView)findViewById(R.id.brain_main_ques);
 
         click_detail = new JSONData("JA");
         click_count = 0;
@@ -121,8 +122,6 @@ public class brain_challenge_game_screen extends Activity{
 
     private void rounds() {
 
-        brain_main_ques=(TextView)findViewById(R.id.brain_main_ques);
-        brain_main_ques.setText("FOR HOW MUCH TIME WAS THE FIGURE DISPLAYED?");
         if (level <= 3)
         {
             str = game_name + "_" + Integer.toString(level) + "_" + Integer.toString((time_to_diaplay - level - SPLASH_TIME_OUT)/2+1);
@@ -130,22 +129,25 @@ public class brain_challenge_game_screen extends Activity{
 
             if (level == 1)
             {
-                brain_main_ques.setText("FOR HOW MUCH TIME WAS THE MOTION DISPLAYED?");
                 image.setImageDrawable(getResources().getDrawable(drawable_id));
                 current_view = (LinearLayout) findViewById(R.id.brain_l_image);
                 current_view.setVisibility(View.VISIBLE);
+                brain_main_ques.setText("FOR HOW MUCH TIME WAS THE FIGURE DISPLAYED?");
             }
+
             else
             {
                 gif.setGifImageResource(drawable_id);
                 current_view = (LinearLayout) findViewById(R.id.brain_l_gif);
                 current_view.setVisibility(View.VISIBLE);
+                brain_main_ques.setText("FOR HOW MUCH TIME WAS THE MOTION DISPLAYED?");
             }
         }
         else
         {
             current_view = (LinearLayout) findViewById(R.id.brain_l_text);
             current_view.setVisibility(View.VISIBLE);
+            brain_main_ques.setText("FOR HOW MUCH TIME DID YOU ANSWER THE QUESTIONS??");
             exp_round_counter = (time_to_diaplay - level + 1)/2; // this will display 2,3,4,5,6
             brain_exp_remark.setText("Click atleast " + exp_round_counter + " correct answers");
             expression_round();
@@ -231,7 +233,7 @@ public class brain_challenge_game_screen extends Activity{
                             final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
                             if (level > 4) {
                                 sp.set_game_score(brain_challenge_game_screen.this, data.get_data_JA());
-                                sp.async_response_modified(brain_challenge_game_screen.this, 10000, true);
+                                sp.async_response_modified(brain_challenge_game_screen.this, 10000, false);
                             }
                             final ProgressDialog progressDialog = new ProgressDialog(brain_challenge_game_screen.this, R.style.AppTheme_Dark_Dialog);
                             progressDialog.setIndeterminate(true);

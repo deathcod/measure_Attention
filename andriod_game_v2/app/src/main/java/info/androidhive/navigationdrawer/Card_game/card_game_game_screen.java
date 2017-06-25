@@ -186,7 +186,7 @@ public class card_game_game_screen extends Activity {
                         final SharedPreference sp = new SharedPreference(b1.getString("game_name"));
                         if (l > 3) {
                             sp.set_game_score(card_game_game_screen.this, data.get_data_JA());
-                            sp.async_response_modified(card_game_game_screen.this, 10000, true);
+                            sp.async_response_modified(card_game_game_screen.this, 10000, false);
                         }
                         final ProgressDialog progressDialog = new ProgressDialog(card_game_game_screen.this,
                                 R.style.AppTheme_Dark_Dialog);

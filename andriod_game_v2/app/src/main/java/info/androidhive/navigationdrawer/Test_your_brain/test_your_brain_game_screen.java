@@ -150,7 +150,7 @@ public class test_your_brain_game_screen extends Activity {
                     sp.set_game_score(test_your_brain_game_screen.this, data.get_data_JA());
                     i.removeExtra("data");
                     i.putExtra("data", sp.get_API() + "\n\n" + sp.get_DATA());
-                    sp.async_response_modified(test_your_brain_game_screen.this, 10000, true);
+                    sp.async_response_modified(test_your_brain_game_screen.this, 10000, false);
                 }
                 final ProgressDialog progressDialog = new ProgressDialog(test_your_brain_game_screen.this,
                         R.style.AppTheme_Dark_Dialog);
