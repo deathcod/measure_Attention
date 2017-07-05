@@ -10,7 +10,7 @@
     $con=mysqli_connect($server,$username,$password,$database) or die ("could not connect to mysql");
 
     $HOSTNAME="http://localhost/";
-    $DATE_FORMAT="j M Y, g:i A";
+    $DATE_FORMAT="j M Y, g:i:s A";
     $SERVER_IP=gethostbyname(gethostname());
 
     require_once 'function.php';

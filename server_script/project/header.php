@@ -8,7 +8,8 @@
   <title id="title"></title>
 
   <!-- CSS  -->
-  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="assets/css/w3.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -16,8 +17,9 @@
   <a href="index.php" class="w3-bar-item w3-button">Home</a>
   <a href="#" class="w3-bar-item w3-button w3-yellow"><?=$SERVER_IP?></a>
   <a href="brain.php" class="w3-bar-item w3-button w3-hover-red w3-right" id="brain">Brain Challenge</a>
+  <a href="test.php" class="w3-bar-item w3-button w3-hover-pink w3-right" id="test">Test Your Brain</a>
   <a href="card.php" class="w3-bar-item w3-button w3-hover-brown w3-right" id="card">Card</a>
   <a href="chess.php" class="w3-bar-item w3-button w3-hover-cyan w3-right" id="chess">Chess</a>
-  <a href="test.php" class="w3-bar-item w3-button w3-hover-pink w3-right" id="test">Test Your Brain</a>
   <a href="stroop.php" class="w3-bar-item w3-button w3-hover-teal w3-right" id="stroop">Stroop</a>
+  <a href="user.php" class="w3-bar-item w3-button w3-hover-yellow w3-right" id="user">User</a>
 </div>
